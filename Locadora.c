@@ -4,14 +4,30 @@
 #include <string.h>
 char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer.
 
-//------ Variável globais -------/
-int qtd_filmes = 0, i = 0; //Variáveis globais para poderem serem acessadas por qualquer função
+//------ Documentação -------//
+
+/**
+*@author ---
+*@version ---
+*@since ---
+*/
+
+//------ Documentação -------//
+
+//------ Variável globais -------//
+
+int qtd_filmes = 0, i = 0, qtd_clientes; //Aloca o tamanho do vetor.
 int consulta; // Variável responsável por armazenar o identificador que é fornecido pelo usuário.
-int escolha; // Variável responsável pelo controle de opções da navegação.
-int ja_cadastrou = 0; //Variável responsável por controla o cadastro de filmes, você só poderá cadastrar os filmes uma vez.
-//----- Variável globais -------/
+char cliente_consulta[40]; // Variável responsável por armazenar o nome do cliente que é fornecido pelo usuário.
+int escolha; // Variável responsável pelo controle das opções da navegação.
+int ja_cadastrou = 0, ja_cadastrou_cliente; //Variáveis responsáveis por controlar o cadastro de filmes e clientes, você só poderá cadastrar uma vez.
+char *guardar; // Variável que armazena o que existe depois do @ dentro de uma string
+char validar_email[1][30] = {"@gmail.com"}; // Variável criada para validar email do usuário <- 30 de tamanho para evitar erros de conflito com a variável email
+
+//----- Variável globais -------//
 
 struct st_filmes{
+
 
 
     int identificador;
@@ -20,10 +36,19 @@ struct st_filmes{
     char genero[15];
 } filmes[0]; // Inicializando o vetor com 0 de tamanho
 
+struct st_clientes{
 
+
+    char nome[40];
+    char cpf[12]; // Tamanho extra para o terminador \0
+    char email[30]
+
+
+} clientes[0];
 
 
 void f_cadastrar_filme(){
+
 
 
 
@@ -34,6 +59,7 @@ void f_cadastrar_filme(){
     printf("\n======Cadastro de filmes=======\n\n");
     ++ja_cadastrou;
     for(i = 0 ; i < qtd_filmes ; i++){
+
 
 
 
@@ -49,7 +75,8 @@ void f_cadastrar_filme(){
         setbuf(stdin,keyboard);
         scanf("%d",&filmes[i].ano_de_producao);
 
-        if(filmes[i].ano_de_producao > 2019 || filmes[i].ano_de_producao < 1895){  // Faz com que o usuário não digite um ano de produção que não exista.
+        if(filmes[i].ano_de_producao > 2019 || filmes[i].ano_de_producao < 1895){     // Faz com que o usuário não digite um ano de produção que não exista.
+
 
             printf("\nAno de produção inválido! \n\n");
             system("pause");
@@ -63,10 +90,12 @@ void f_cadastrar_filme(){
         printf("\n\n");
 
     }
-    for(i = 0 ; i < qtd_filmes ; i++){  //Segundo for para tratamento de erros
+    for(i = 0 ; i < qtd_filmes ; i++){   //Segundo for para tratamento de erros
 
 
-        if(filmes[i].identificador == filmes[i+1].identificador ){  // Se os identificadores forem iguais encerra o programa.
+
+        if(filmes[i].identificador == filmes[i+1].identificador ){   // Se os identificadores forem iguais, encerre o programa.
+
 
             printf("Você inseriu filmes com identificadores iguais.\n");
             system("pause");
@@ -78,11 +107,95 @@ void f_cadastrar_filme(){
 
     system("pause"); // Dar uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
-    main();          // Chamada de função
+    menu_filme();    // Chamada de função
 
 
 }
+
+void f_cadastrar_cliente(){
+
+
+    printf("Diga-me quantos clientes você deseja cadastrar na locadora: ");
+    scanf("%d",&qtd_clientes);
+    clientes[qtd_clientes];
+
+    printf("\n======Cadastro de cliente=======\n\n");
+    ++ja_cadastrou_cliente;
+    for(i = 0 ; i < qtd_clientes ; i++){
+
+
+
+
+        printf("Diga-me o nome do [%i] cliente: ", i+1);
+        setbuf(stdin,keyboard);
+        scanf("%39[^\n]s", clientes[i].nome);
+
+        printf("Diga-me o cpf do [%i] cliente(Sem pontuação): ", i+1);
+        setbuf(stdin,keyboard);
+        scanf("%11[^\n]s",clientes[i].cpf);
+
+        if(strlen(clientes[i].cpf) != 11){  //Verifica se o CPF contêm 11 números
+
+
+            printf("CPF Inválido! (Sem pontos ou traços) \n");
+            system("pause");
+            exit(1);
+        }
+
+        printf("Diga-me o email do [%i] cliente: ", i+1);
+        setbuf(stdin,keyboard);
+        scanf("%29[^\n]s",clientes[i].email);
+
+        guardar = strrchr(clientes[i].email,'@');
+
+        if( strcmp(guardar,validar_email[0]) != 0 ){  // Se o usuário não digitar a formatação de um email correto o programa fecha.
+
+
+            printf("Email inválido, Aceitamos somente o dominio gmail.com, também verifique o uso do '@' .\n");
+            system("pause");
+            exit(1);
+        }
+
+        printf("\n\n");
+
+    }
+    for(i = 0 ; i < qtd_clientes ; i++){
+
+
+
+        if(strcmp(clientes[i].cpf,clientes[i+1].cpf) == 0 ){
+
+
+            printf("Você inseriu clientes com cpf iguais.\n");
+            system("pause");
+            exit(1);
+        }
+        else if(strcmp(clientes[i].email,clientes[i+1].email) == 0  ){
+
+            printf("Você inseriu clientes com emails iguais.\n");
+            system("pause");
+            exit(1);
+        }
+
+        else if(strcmp(clientes[i].nome,clientes[i+1].nome) == 0){
+
+            printf("Você inseriu clientes com nomes iguais.\n");
+            system("pause");
+            exit(1);
+        }
+    }
+
+
+
+    system("pause");
+    system("cls");
+    menu_cliente();
+
+
+}
+
 void f_listar_filmes(){
+
 
 
     printf("\n======Listar os filmes=======\n\n");
@@ -91,7 +204,9 @@ void f_listar_filmes(){
     for(i = 0 ; i < qtd_filmes ; i++){
 
 
-        if(filmes[i].identificador == filmes[i+1].identificador){  // Condição para não mostrar o filme apagado.
+
+        if(filmes[i].identificador == filmes[i+1].identificador){   // Condição para não mostrar o filme apagado.
+
 
             continue;
         }
@@ -105,11 +220,40 @@ void f_listar_filmes(){
 
     system("pause");
     system("cls");
-    main();
+    menu_filme();
+
+
+}
+void f_listar_clientes(){
+
+
+
+    printf("\n======Listar os clientes=======\n\n");
+
+
+    for(i = 0 ; i < qtd_clientes ; i++){
+
+
+
+        if( strcmp(clientes[i].cpf,clientes[i+1].cpf ) == 0){   // Condição para não mostrar o cliente apagado.
+
+
+            continue;
+        }
+        printf("Nome [%s]:  \n",clientes[i].nome);
+        printf("CPF: [%s] \n",  clientes[i].cpf);
+        printf("Email: [%s] \n",clientes[i].email);
+        printf("\n\n");
+    }
+
+    system("pause");
+    system("cls");
+    menu_cliente();
 
 }
 
 void f_consultar_filmes(){
+
 
 
     printf("\n======Consultar os filmes=======\n\n");
@@ -122,17 +266,21 @@ void f_consultar_filmes(){
     for(i = 0 ; i < qtd_filmes ; i++){
 
 
-        if(filmes[i].identificador == filmes[i+1].identificador){  
+
+        if(filmes[i].identificador == filmes[i+1].identificador){   // Condição para não mostrar o filme apagado.
+
 
             // Deixar sem nenhuma ação.
         }
 
         if(consulta == filmes[i].identificador){
 
+
             printf("O filme existe em nosso catálogo. \n");
             break;
         }
-        else if(consulta != filmes[i].identificador && i == qtd_filmes-1){  //Só executará a ação quando o laço for terminar
+        else if(consulta != filmes[i].identificador && i == qtd_filmes-1){   //Só executará a ação quando o laço for terminar
+
 
             printf("O filme não existe em nosso catálogo. \n");
         }
@@ -142,17 +290,20 @@ void f_consultar_filmes(){
 
     if(escolha == 1){
 
+
         system("pause");
         system("cls");
         f_consultar_filmes();
     }
     else if(escolha == 2){
 
+
         system("pause");
         system("cls");
-        main();
+        menu_filme();
     }
     else{
+
 
         printf("Valor não reconhecido... \n");
         system("pause");
@@ -163,8 +314,69 @@ void f_consultar_filmes(){
 
 
 }
+void f_consultar_clientes(){
 
+
+
+    printf("\n======Consultar os clientes=======\n\n");
+
+    printf("Diga-me o nome do cliente a ser consultado: ");
+    scanf("%s",cliente_consulta);
+
+    printf("\n");
+
+    for(i = 0 ; i < qtd_clientes ; i++){
+
+
+
+        if(strcmp(cliente_consulta,clientes[i+1].nome) == 0){
+
+            // Deixar sem nenhuma ação.
+        }
+
+        if(strcmp(cliente_consulta,clientes[i].nome) == 0){
+
+
+            printf("Esse cliente está cadastrado em nossa locadora. \n");
+            break;
+        }
+        else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_clientes-1){   //Só executará a ação quando o laço for terminar
+
+
+            printf("Esse cliente não está cadastrado em nossa locadora. \n");
+        }
+    }
+    printf("\n\nConsultar novamente? [1] - S | [2] - N : ");
+    scanf("%d",&escolha);
+
+    if(escolha == 1){
+
+
+        system("pause");
+        system("cls");
+        f_consultar_clientes();
+    }
+    else if(escolha == 2){
+
+
+        system("pause");
+        system("cls");
+        menu_cliente();
+    }
+    else{
+
+
+        printf("Valor não reconhecido... \n");
+        system("pause");
+        system("cls");
+        f_consultar_clientes();
+
+    }
+
+
+}
 void f_visualizar_filme(){
+
 
 
     printf("\n======Visualizar os filmes=======\n\n");
@@ -177,7 +389,9 @@ void f_visualizar_filme(){
     for(i = 0 ; i < qtd_filmes ; i++){
 
 
+
         if(consulta == filmes[i].identificador){
+
 
             printf("Filme [%i]:  \n",i+1);
             printf("Título: [%s] \n", filmes[i].titulo);
@@ -190,6 +404,7 @@ void f_visualizar_filme(){
         }
         else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){
 
+
             printf("Filme não encontrado. \n");
         }
     }
@@ -198,17 +413,20 @@ void f_visualizar_filme(){
 
     if(escolha == 1){
 
+
         system("pause");
         system("cls");
         f_visualizar_filme();
     }
     else if(escolha == 2){
 
+
         system("pause");
         system("cls");
-        main();
+        menu_filme();
     }
     else{
+
 
         printf("Valor não reconhecido... \n");
         system("pause");
@@ -217,8 +435,66 @@ void f_visualizar_filme(){
     }
 
 }
+void f_visualizar_clientes(){
 
+
+
+    printf("\n======Visualizar os clientes=======\n\n");
+
+    printf("Diga-me o nome do cliente a ser visualizado: ");
+    scanf("%s",cliente_consulta);
+
+    printf("\n");
+
+    for(i = 0 ; i < qtd_clientes ; i++){
+
+
+
+        if(strcmp(cliente_consulta,clientes[i].nome) == 0){
+
+
+            printf("Nome: [%s]:  \n",clientes[i].nome);
+            printf("CPF: [%s] \n",  clientes[i].cpf);
+            printf("Email: [%s] \n",clientes[i].email);
+            printf("\n\n");
+            break;
+
+        }
+        else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_clientes-1 ){
+
+
+            printf("Cliente não encontrado. \n");
+        }
+    }
+    printf("\n\nVisualizar novamente? [1] - S | [2] - N : ");
+    scanf("%d",&escolha);
+
+    if(escolha == 1){
+
+
+        system("pause");
+        system("cls");
+        f_visualizar_clientes();
+    }
+    else if(escolha == 2){
+
+
+        system("pause");
+        system("cls");
+        menu_cliente();
+    }
+    else{
+
+
+        printf("Valor não reconhecido... \n");
+        system("pause");
+        system("cls");
+        f_visualizar_clientes();
+    }
+
+}
 void f_editar_filme(){
+
 
 
 
@@ -230,13 +506,16 @@ void f_editar_filme(){
     if(escolha == 1){
 
 
+
         printf("\nDiga-me o identificador do filme a ser atualizado: ");
         scanf("%d",&consulta);
         printf("\n");
         for(i = 0 ; i < qtd_filmes ; i++){
 
 
+
             if(consulta == filmes[i].identificador){
+
 
 
                 printf("Diga-me o identificador do novo filme: ");
@@ -251,7 +530,8 @@ void f_editar_filme(){
                 setbuf(stdin,keyboard);
                 scanf("%d",&filmes[i].ano_de_producao);
 
-                if(filmes[i].ano_de_producao > 2019 || filmes[i].ano_de_producao < 1895){    
+                if(filmes[i].ano_de_producao > 2019 || filmes[i].ano_de_producao < 1895){     // Faz com que o usuário não digite um ano de produção que não exista.
+
 
                     printf("\nAno de produção inválido! \n\n");
                     system("pause");
@@ -266,6 +546,7 @@ void f_editar_filme(){
             }
             else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){
 
+
                 printf("Filme não encontrado... \n");
             }
         }
@@ -276,24 +557,30 @@ void f_editar_filme(){
 
         if(escolha == 1){
 
+
             system("pause");
             system("cls");
             f_editar_filme();
         }
         else if(escolha == 2){
 
+
             system("pause");
             system("cls");
-            main();
+            menu_filme();
         }
         else{
 
+
             printf("Valor não reconhecido... \n");
-            exit(1);
+            system("pause");
+            system("cls");
+            f_editar_filme();
         }
     }
 
     else if(escolha == 2){
+
 
 
 
@@ -303,7 +590,9 @@ void f_editar_filme(){
         for(i = 0 ; i < qtd_filmes ; i++){
 
 
-            if(consulta == filmes[i].identificador){                // "Apagando" Os filmes da Random Acess Memory
+
+            if(consulta == filmes[i].identificador){                 // "Apagando" Os filmes da Random Acess Memory
+
 
                 strcpy(filmes[i].genero,filmes[i+1].genero);
                 strcpy(filmes[i].titulo,filmes[i+1].titulo);
@@ -315,6 +604,7 @@ void f_editar_filme(){
 
             else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){
 
+
                 printf("Filme não encontrado... \n");
             }
         }
@@ -325,31 +615,38 @@ void f_editar_filme(){
 
         if(escolha == 1){
 
+
             system("pause");
             system("cls");
             f_editar_filme();
         }
         else if(escolha == 2){
 
+
             system("pause");
             system("cls");
-            main();
+            menu_filme();
         }
         else{
 
+
             printf("Valor não reconhecido... \n");
-            exit(1);
+            system("pause");
+            system("cls");
+            f_editar_filme();
         }
 
     }
 
     else if(escolha == 3){
 
+
         system("cls");
-        main();
+        menu_filme();
     }
 
     else{
+
 
         printf("Valor inválido! \n");
         system("pause");
@@ -358,15 +655,181 @@ void f_editar_filme(){
     }
 
 }
+void f_editar_clientes(){
 
 
 
-int main(){
+
+    printf("\n======Editar os clientes=======\n\n");
+
+    printf("O que você deseja? [1] - Atualizar cliente | [2] - Excluir cliente | [3] - Sair : ");
+    scanf("%d",&escolha);
+
+    if(escolha == 1){
 
 
-    setlocale(LC_ALL,"Portuguese"); // Permite acentos e outras regras da língua portuguesa em strings.
 
-    if(ja_cadastrou == 0){ //Se o usuário ainda não tiver cadastrado o filme, o primeiro menu aparece.
+        printf("\nDiga-me o nome do cliente a ser atualizado: ");
+        scanf("%s",cliente_consulta);
+        printf("\n");
+        for(i = 0 ; i < qtd_clientes ; i++){
+
+
+
+            if(strcmp(cliente_consulta,clientes[i].nome) == 0){
+
+
+
+                printf("Diga-me o novo nome do [%i] cliente: ", i+1);
+                setbuf(stdin,keyboard);
+                scanf("%39[^\n]s", clientes[i].nome);
+
+                printf("Diga-me o novo cpf do [%i] cliente(Sem pontuação): ", i+1);
+                setbuf(stdin,keyboard);
+                scanf("%11[^\n]s",clientes[i].cpf);
+
+                if(strlen(clientes[i].cpf) != 11){
+
+
+                    printf("CPF Inválido! (Sem pontos ou traços) \n");
+                    system("pause");
+                    exit(1);
+                }
+
+                printf("Diga-me o novo email do [%i] cliente: ", i+1);
+                setbuf(stdin,keyboard);
+                scanf("%29[^\n]s",clientes[i].email);
+
+                guardar = strrchr(clientes[i].email,'@');
+
+                if( strcmp(guardar,validar_email[0]) != 0 ){
+
+
+                    printf("Email inválido, Aceitamos somente o dominio gmail.com, também verifique o uso do '@' .\n");
+                    system("pause");
+                    exit(1);
+                }
+
+                printf("\n\n");
+                printf("\nCliente atualizado com sucesso! \n");
+            }
+
+            else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_clientes-1){
+
+
+                printf("Cliente não encontrado... \n");
+            }
+        }
+
+
+        printf("\n\nAtualizar novamente? [1] - S | [2] - N : ");
+        scanf("%d",&escolha);
+
+        if(escolha == 1){
+
+
+            system("pause");
+            system("cls");
+            f_editar_clientes();
+        }
+        else if(escolha == 2){
+
+
+            system("pause");
+            system("cls");
+            menu_cliente();
+        }
+        else{
+
+
+            printf("Valor não reconhecido... \n");
+            system("pause");
+            system("cls");
+            f_editar_clientes();
+        }
+    }
+
+    else if(escolha == 2){
+
+
+
+
+        printf("Diga-me o nome do cliente a ser excluído: ");
+        scanf("%s",cliente_consulta);
+
+        for(i = 0 ; i < qtd_clientes ; i++){
+
+
+
+            if(strcmp(cliente_consulta,clientes[i].nome) == 0){             // "Apagando" Os usuários da Random Acess Memory
+
+
+                strcpy(clientes[i].nome,clientes[i+1].nome);
+                strcpy(clientes[i].cpf,clientes[i+1].cpf);
+                strcpy(clientes[i].email,clientes[i+1].email);
+                printf("Cliente excluído com sucesso! \n");
+                break;
+            }
+
+            else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_clientes-1 ){
+
+
+                printf("Cliente não encontrado... \n");
+            }
+        }
+
+
+        printf("\n\nExcluir novamente? [1] - S | [2] - N : ");
+        scanf("%d",&escolha);
+
+        if(escolha == 1){
+
+
+            system("pause");
+            system("cls");
+            f_editar_clientes();
+        }
+        else if(escolha == 2){
+
+
+            system("pause");
+            system("cls");
+            menu_cliente();
+        }
+        else{
+
+
+            printf("Valor não reconhecido... \n");
+            system("pause");
+            system("cls");
+            f_editar_clientes();
+        }
+
+    }
+
+    else if(escolha == 3){
+
+
+        system("cls");
+        menu_cliente();
+    }
+
+    else{
+
+
+        printf("Valor inválido! \n");
+        system("pause");
+        system("cls");
+        f_editar_clientes();
+    }
+
+}
+void menu_filme(){
+
+
+
+    if(ja_cadastrou == 0){
+
 
         printf("O que você deseja fazer? \n");
         printf("[1] - Cadastrar filme \n");
@@ -379,6 +842,7 @@ int main(){
         scanf("%d",&escolha);
 
         switch(escolha){
+
 
 
 
@@ -409,11 +873,12 @@ int main(){
             printf("Opção não reconhecida... \n");
             system("pause");
             system("cls");
-            main();
+            menu_filme();
 
         }
     }
-    else{ //Senão o segundo menu entra em ação.
+    else{
+
 
         printf("O que você deseja fazer? \n");
         printf("[1] - Editar filme    \n");
@@ -425,6 +890,7 @@ int main(){
         scanf("%d",&escolha);
 
         switch(escolha){
+
 
 
 
@@ -451,9 +917,149 @@ int main(){
             printf("Opção não reconhecida... \n");
             system("pause");
             system("cls");
-            main();
+            menu_filme();
         }
 
         return 0;
     }
+
+}
+
+void menu_cliente(){
+
+
+
+    if(ja_cadastrou_cliente == 0){
+
+
+        printf("O que você deseja fazer? \n");
+        printf("[1] - Cadastrar cliente \n");
+        printf("[2] - Editar cliente    \n");
+        printf("[3] - Listar clientes   \n");
+        printf("[4] - Visualizar cliente \n");
+        printf("[5] - Consultar cliente  \n");
+        printf("[6] - Sair \n");
+        printf("Diga-me a opção: ");
+        scanf("%d",&escolha);
+
+        switch(escolha){
+
+
+
+
+
+        case 1:
+            system("cls");
+            f_cadastrar_cliente();
+            break;
+        case 2:
+            system("cls");
+            f_editar_clientes();
+            break;
+        case 3:
+            system("cls");
+            f_listar_clientes();
+            break;
+        case 4:
+            system("cls");
+            f_visualizar_clientes();
+            break;
+        case 5:
+            system("cls");
+            f_consultar_clientes();
+            break;
+        case 6:
+            break;
+        default:
+            printf("Opção não reconhecida... \n");
+            system("pause");
+            system("cls");
+            menu_cliente();
+
+        }
+    }
+    else{
+
+
+        printf("O que você deseja fazer? \n");
+        printf("[1] - Editar cliente    \n");
+        printf("[2] - Listar clientes  \n");
+        printf("[3] - Visualizar cliente \n");
+        printf("[4] - Consultar cliente  \n");
+        printf("[5] - Sair \n");
+        printf("Diga-me a opção: ");
+        scanf("%d",&escolha);
+
+        switch(escolha){
+
+
+
+
+
+        case 1:
+            system("cls");
+            f_editar_clientes();
+            break;
+        case 2:
+            system("cls");
+            f_listar_clientes();
+            break;
+        case 3:
+            system("cls");
+            f_visualizar_clientes();
+            break;
+        case 4:
+            system("cls");
+            f_consultar_clientes();
+            break;
+        case 5:
+            break;
+        default:
+            printf("Opção não reconhecida... \n");
+            system("pause");
+            system("cls");
+            menu_cliente();
+        }
+
+        return 0;
+    }
+
+}
+
+
+int main(){
+
+
+    setlocale(LC_ALL,"Portuguese"); // Permite acentos e outras regras da língua portuguesa em strings.
+
+    printf("O que você deseja fazer? \n");
+    printf("[1] - Entrar no menu da locadora \n");
+    printf("[2] - Entrar no menu do cliente \n");
+    printf("[3] - Sair \n");
+    printf("Escolha a opção: ");
+    scanf("%d",&escolha);
+
+    switch(escolha){
+
+
+    case 1:
+        system("cls");
+        menu_filme();
+        break;
+    case 2:
+        system("cls");
+        menu_cliente();
+        break;
+    case 3:
+        break;
+    default:
+        printf("Opção não reconhecida... \n");
+        system("pause");
+        system("cls");
+        main();
+
+
+    }
+
+
 }
