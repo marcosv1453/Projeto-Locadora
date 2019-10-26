@@ -16,18 +16,17 @@ char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer.
 
 //------ Variável globais -------//
 
-int qtd_filmes = 0, qtd_clientes = 0; //Aloca o tamanho do vetor.
 int i = 0, j = 0; // Variáveis usadas no FOR ( I = Filmes ) ( J = Clientes )
+int qtd_filmes = 0, qtd_clientes = 0; // Conta a quantidade de clientes ou filmes cadastrados.
 int consulta; // Variável responsável por armazenar o identificador que é fornecido pelo usuário.
-char cliente_consulta[40]; // Variável responsável por armazenar o nome do cliente que é fornecido pelo usuário.
+char cliente_consulta[40]; // Variável responsável por armazenar e comparar o nome do cliente que é fornecido pelo usuário no menu de atualização.
 int escolha; // Variável responsável pelo controle das opções da navegação.
-int ja_cadastrou = 0, ja_cadastrou_cliente = 0; //Variáveis responsáveis por controlar o cadastro de filmes e clientes, você só poderá cadastrar uma vez.
 char *guardar; // Variável que armazena o que existe depois do @ dentro de uma string
-char validar_email[1][30] = {"@gmail.com"}; // Variável criada para validar email do usuário <- 30 de tamanho para evitar erros de conflito com a variável email
+char validar_email[1][30] = {"@gmail.com"}; // Variável criada para validar email do usuário <- 30 de tamanho para evitar erros de conflito com a variável email do struct filmes
 
 //----- Variável globais -------//
 
-struct st_filmes{
+struct st_filmes{ // Struct para armazenar os filmes
 
 
 
@@ -35,9 +34,9 @@ struct st_filmes{
     char titulo[40];
     int ano_de_producao;
     char genero[15];
-} filmes[0]; // Inicializando o vetor com 0 de tamanho
+} filmes[20]; // Inciializando o Struct com um vetor de 20 de tamanho, você só poderá cadastrar 20 filmes
 
-struct st_clientes{
+struct st_clientes{ // Struct para armazenar os clientes
 
 
     char nome[40];
@@ -45,112 +44,74 @@ struct st_clientes{
     char email[30]
 
 
-} clientes[0];
+} clientes[20]; // Inciializando o Struct com um vetor de 20 de tamanho, você só poderá cadastrar 20 clientes
 
+void f_cadastrar_filme(){ // Função para cadastrar os filmes
 
-void f_cadastrar_filme(){
-
-
-
-
-    printf("Diga-me quantos filmes você deseja cadastrar na locadora: ");
-    scanf("%d",&qtd_filmes);
-    filmes[qtd_filmes]; // Alocando o tamanho do vetor
 
     printf("\n======Cadastro de filmes=======\n\n");
 
-    for(i = 0 ; i < qtd_filmes ; i++){
 
-
-
-
-        printf("Diga-me o identificador do [%i] filme: ", i+1);
+        printf("Diga-me o identificador do filme: ");
         setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
-        scanf("%d", &filmes[i].identificador);
+        scanf("%d", &filmes[qtd_filmes].identificador);
 
-        printf("Diga-me o título do [%i] filme: ", i+1);
+        printf("Diga-me o título do filme: ");
         setbuf(stdin,keyboard);
-        scanf("%39[^\n]s",filmes[i].titulo);        // Pegando o input da forma correta, sem o \n
+        scanf("%39[^\n]s",&filmes[qtd_filmes].titulo);        // Pegando o input da forma correta, sem o \n
 
-        printf("Diga-me o ano de produção do [%i] filme: ", i+1);
+        printf("Diga-me o ano de produção do filme: ");
         setbuf(stdin,keyboard);
-        scanf("%d",&filmes[i].ano_de_producao);
+        scanf("%d",&filmes[qtd_filmes].ano_de_producao);
 
-        if(filmes[i].ano_de_producao > 2019 || filmes[i].ano_de_producao < 1895){     // Faz com que o usuário não digite um ano de produção que não exista.
-
+        if(filmes[qtd_filmes].ano_de_producao > 2019 || filmes[qtd_filmes].ano_de_producao < 1895){     // Faz com que o usuário não digite um ano de produção que não exista.
 
             printf("\nAno de produção inválido! \n\n");
             system("pause");
             system("cls");
-            f_cadastrar_filme();
+            f_cadastrar_filme(); // Se o ano de produção for inválido chama a função novamente!
         }
-
-        printf("Diga-me o gênero do [%i] filme: ", i+1);
+        printf("Diga-me o gênero do filme: ");
         setbuf(stdin,keyboard);
-        scanf("%14[^\n]s",filmes[i].genero);
+        scanf("%14[^\n]s",&filmes[i].genero);
 
         printf("\n\n");
 
-    }
-    for(i = 0 ; i < qtd_filmes ; i++){   //Segundo for para tratamento de erros
+++qtd_filmes; // Após o usuário cadastrar o filme essa variável é incrementada, fazendo que conte quantos filmes foram cadastrados.
 
-
-
-        if(filmes[i].identificador == filmes[i+1].identificador ){   // Se os identificadores forem iguais, encerre o programa.
-
-
-            printf("Você inseriu filmes com identificadores iguais.\n");
-            system("pause");
-            system("cls");
-            f_cadastrar_filme();
-        }
-    }
-
-
-   ++ja_cadastrou;
-    system("pause"); // Dar uma pausa antes de executar a próxima linha de comando
+    system("pause"); // Da uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
     menu_filme();    // Chamada de função
 
-
 }
 
-void f_cadastrar_cliente(){
 
-
-    printf("Diga-me quantos clientes você deseja cadastrar na locadora: ");
-    scanf("%d",&qtd_clientes);
-    clientes[qtd_clientes];
+void f_cadastrar_cliente(){ // Função para cadastrar clientes
 
     printf("\n======Cadastro de cliente=======\n\n");
 
-    for(j = 0 ; j < qtd_clientes ; j++){
+        printf("Diga-me o nome do cliente: ");
+        setbuf(stdin,keyboard); // Usando o setbuf para tirar o lixo da entrada
+        scanf("%39[^\n]s", clientes[qtd_clientes].nome); // Pegando o input do usuario
 
-
-
-
-        printf("Diga-me o nome do [%i] cliente: ", j+1);
+        printf("Diga-me o cpf do cliente(Sem pontuação): ");
         setbuf(stdin,keyboard);
-        scanf("%39[^\n]s", clientes[j].nome);
+        scanf("%11[^\n]s",clientes[qtd_clientes].cpf);
 
-        printf("Diga-me o cpf do [%i] cliente(Sem pontuação): ", j+1);
-        setbuf(stdin,keyboard);
-        scanf("%11[^\n]s",clientes[j].cpf);
-
-        if(strlen(clientes[j].cpf) != 11){  //Verifica se o CPF contêm 11 números
+        if(strlen(clientes[qtd_clientes].cpf) != 11){  //Verifica se o CPF contêm 11 números, se não tiver a função é chamada novamente.
 
 
             printf("CPF Inválido! (Sem pontos ou traços) \n");
             system("pause");
             system("cls");
-            f_cadastrar_cliente();
+            f_cadastrar_cliente(); // Se o CPF for inválido chama a funão novamente!
         }
 
-        printf("Diga-me o email do [%i] cliente: ", j+1);
+        printf("Diga-me o email do cliente: ");
         setbuf(stdin,keyboard);
-        scanf("%29[^\n]s",clientes[j].email);
+        scanf("%29[^\n]s",clientes[qtd_clientes].email);
 
-        guardar = strrchr(clientes[j].email,'@');
+        guardar = strrchr(clientes[qtd_clientes].email,'@'); // Guarda a primeira ocorrência do @ na string
 
         if( strcmp(guardar,validar_email[0]) != 0 ){  // Se o usuário não digitar a formatação de um email correto o programa fecha.
 
@@ -162,43 +123,15 @@ void f_cadastrar_cliente(){
 
         printf("\n\n");
 
-    }
-    for(j = 0 ; j < qtd_clientes ; j++){
+++qtd_clientes; // Após o usuário cadastrar o cliente essa variável é incrementada, fazendo que conte quantos clientes foram cadastrados.
 
-
-
-        if(strcmp(clientes[j].cpf,clientes[j+1].cpf) == 0 ){
-
-
-            printf("Você inseriu clientes com cpf iguais.\n");
-            system("cls");
-            f_cadastrar_cliente();
-        }
-        else if(strcmp(clientes[j].email,clientes[j+1].email) == 0  ){
-
-            printf("Você inseriu clientes com emails iguais.\n");
-            system("cls");
-            f_cadastrar_cliente();
-        }
-
-        else if(strcmp(clientes[j].nome,clientes[j+1].nome) == 0){
-
-            printf("Você inseriu clientes com nomes iguais.\n");
-            system("cls");
-            f_cadastrar_cliente();
-        }
-    }
-
-
-  ++ja_cadastrou_cliente;
-    system("pause");
-    system("cls");
-    menu_cliente();
-
+    system("pause"); // Da uma pausa para a próxima linha de comando
+    system("cls");   // Limpa o console
+    menu_cliente();  // Chama a função de menu dos clientes
 
 }
 
-void f_listar_filmes(){
+void f_listar_filmes(){ // Função para listar os filmes
 
 
 
@@ -212,9 +145,8 @@ void f_listar_filmes(){
         if(filmes[i].identificador == filmes[i+1].identificador){   // Condição para não mostrar o filme apagado.
 
 
-            continue;
+            continue; // Se o filme existir na memória, então as linhas de baixo não são executadas.
         }
-        printf("Filme [%i]:  \n",i+1);
         printf("Título: [%s] \n", filmes[i].titulo);
         printf("Gênero: [%s] \n", filmes[i].genero);
         printf("Ano de produção: [%d]\n", filmes[i].ano_de_producao);
@@ -222,13 +154,13 @@ void f_listar_filmes(){
         printf("\n\n");
     }
 
-    system("pause");
-    system("cls");
-    menu_filme();
+    system("pause"); // Da uma pausa antes da próxima linha de comando
+    system("cls");   // Limpa o console
+    menu_filme();    // Chama a função novamente
 
 
 }
-void f_listar_clientes(){
+void f_listar_clientes(){ // Função para listar os clientes
 
 
 
@@ -242,7 +174,7 @@ void f_listar_clientes(){
         if( strcmp(clientes[j].cpf,clientes[j+1].cpf ) == 0){   // Condição para não mostrar o cliente apagado.
 
 
-            continue;
+            continue; // Se o cliente existir na memória, então as linhas de baixo não são executadas.
         }
         printf("Nome [%s]:  \n",clientes[j].nome);
         printf("CPF: [%s] \n",  clientes[j].cpf);
@@ -250,20 +182,20 @@ void f_listar_clientes(){
         printf("\n\n");
     }
 
-    system("pause");
-    system("cls");
-    menu_cliente();
+    system("pause"); // Da uma pausa antes da próxima linha de comando
+    system("cls");   // Limpa o console
+    menu_cliente();  // Chama a função novamente
 
 }
 
-void f_consultar_filmes(){
+void f_consultar_filmes(){ // Função para consultar os filmes
 
 
 
     printf("\n======Consultar os filmes=======\n\n");
 
     printf("Diga-me o identificador do filme a ser consultado: ");
-    scanf("%d",&consulta);
+    scanf("%d",&consulta); // Armazena o identificador que o usuário digitou
 
     printf("\n");
 
@@ -286,27 +218,27 @@ void f_consultar_filmes(){
         else if(consulta != filmes[i].identificador && i == qtd_filmes-1){   //Só executará a ação quando o laço for terminar
 
 
-            printf("O filme não existe em nosso catálogo. \n");
+            printf("O filme não existe em nosso catálogo. \n"); // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
         }
     }
     printf("\n\nConsultar novamente? [1] - S | [2] - N : ");
-    scanf("%d",&escolha);
+    scanf("%d",&escolha); // Armazena a escolha do usuário
 
-    if(escolha == 1){
+    if(escolha == 1){ // Se ele digitar um a função de consultar filmes é chamada novamente
 
 
         system("pause");
         system("cls");
         f_consultar_filmes();
     }
-    else if(escolha == 2){
+    else if(escolha == 2){ // Se 2 ele é direcionado para o menu
 
 
         system("pause");
         system("cls");
         menu_filme();
     }
-    else{
+    else{ // Caso ele digita um número que não pertença as opções acima
 
 
         printf("Valor não reconhecido... \n");
@@ -318,14 +250,14 @@ void f_consultar_filmes(){
 
 
 }
-void f_consultar_clientes(){
+void f_consultar_clientes(){ // Função para consultar os clientes
 
 
 
     printf("\n======Consultar os clientes=======\n\n");
 
     printf("Diga-me o nome do cliente a ser consultado: ");
-    scanf("%s",cliente_consulta);
+    scanf("%s",&cliente_consulta); // Armazena o nome que o usuário digitou
 
     printf("\n");
 
@@ -347,27 +279,27 @@ void f_consultar_clientes(){
         else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1){   //Só executará a ação quando o laço for terminar
 
 
-            printf("Esse cliente não está cadastrado em nossa locadora. \n");
+            printf("Esse cliente não está cadastrado em nossa locadora. \n"); // Se o nome que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
         }
     }
     printf("\n\nConsultar novamente? [1] - S | [2] - N : ");
-    scanf("%d",&escolha);
+    scanf("%d",&escolha);  // Armazena a escolha do usuário
 
-    if(escolha == 1){
+    if(escolha == 1){ // Se ele digitar um a função de consultar clientes é chamada novamente
 
 
         system("pause");
         system("cls");
         f_consultar_clientes();
     }
-    else if(escolha == 2){
+    else if(escolha == 2){ // Se 2 ele é direcionado para o menu
 
 
         system("pause");
         system("cls");
         menu_cliente();
     }
-    else{
+    else{ // Caso ele digita um número que não pertença as opções acima
 
 
         printf("Valor não reconhecido... \n");
@@ -379,14 +311,14 @@ void f_consultar_clientes(){
 
 
 }
-void f_visualizar_filme(){
+void f_visualizar_filme(){ // Função para visualizar o filme
 
 
 
     printf("\n======Visualizar os filmes=======\n\n");
 
     printf("Diga-me o identificador do filme a ser visualizado: ");
-    scanf("%d",&consulta);
+    scanf("%d",&consulta); // Armazena o identificador que o usuário digitou
 
     printf("\n");
 
@@ -406,30 +338,30 @@ void f_visualizar_filme(){
             break;
 
         }
-        else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){
+        else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){ //Só executará a ação quando o laço for terminar
 
 
-            printf("Filme não encontrado. \n");
+            printf("Filme não encontrado. \n"); // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
         }
     }
     printf("\n\nVisualizar novamente? [1] - S | [2] - N : ");
-    scanf("%d",&escolha);
+    scanf("%d",&escolha); // Armazena a escolha do usuário
 
-    if(escolha == 1){
+    if(escolha == 1){  // Se ele digitar um a função de consultar filmes é chamada novamente
 
 
         system("pause");
         system("cls");
         f_visualizar_filme();
     }
-    else if(escolha == 2){
+    else if(escolha == 2){ // Se 2 ele é direcionado para o menu
 
 
         system("pause");
         system("cls");
         menu_filme();
     }
-    else{
+    else{ // Caso ele digita um número que não pertença as opções acima
 
 
         printf("Valor não reconhecido... \n");
@@ -439,14 +371,14 @@ void f_visualizar_filme(){
     }
 
 }
-void f_visualizar_clientes(){
+void f_visualizar_clientes(){ // Função para visualizar o cliente
 
 
 
     printf("\n======Visualizar os clientes=======\n\n");
 
     printf("Diga-me o nome do cliente a ser visualizado: ");
-    scanf("%s",cliente_consulta);
+    scanf("%s",cliente_consulta); // Armazena o nome que o usuário digitou
 
     printf("\n");
 
@@ -464,30 +396,31 @@ void f_visualizar_clientes(){
             break;
 
         }
-        else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1 ){
+        else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1 ){ //Só executará a ação quando o laço for terminar
 
 
-            printf("Cliente não encontrado. \n");
+            printf("Cliente não encontrado. \n"); // Se o nome que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
         }
     }
     printf("\n\nVisualizar novamente? [1] - S | [2] - N : ");
-    scanf("%d",&escolha);
+    scanf("%d",&escolha); // Armazena a escolha do usuário
 
-    if(escolha == 1){
+    if(escolha == 1){ // Se ele digitar um a função de consultar clientes é chamada novamente
 
 
         system("pause");
         system("cls");
         f_visualizar_clientes();
     }
-    else if(escolha == 2){
+    else if(escolha == 2){ // Se 2 ele é direcionado para o menu
+
 
 
         system("pause");
         system("cls");
         menu_cliente();
     }
-    else{
+    else{ // Caso ele digita um número que não pertença as opções acima
 
 
         printf("Valor não reconhecido... \n");
@@ -497,7 +430,7 @@ void f_visualizar_clientes(){
     }
 
 }
-void f_editar_filme(){
+void f_editar_filme(){ // Função para editar o filme
 
 
 
@@ -505,14 +438,14 @@ void f_editar_filme(){
     printf("\n======Editar os filmes=======\n\n");
 
     printf("O que você deseja? [1] - Atualizar filme | [2] - Excluir filme | [3] - Sair : ");
-    scanf("%d",&escolha);
+    scanf("%d",&escolha); // Armazena a opção do usuário
 
-    if(escolha == 1){
+    if(escolha == 1){ // Se o número digitado for 1 então irá atualizar o filme
 
 
 
         printf("\nDiga-me o identificador do filme a ser atualizado: ");
-        scanf("%d",&consulta);
+        scanf("%d",&consulta);  // Armazena o filme que o usuário digitou
         printf("\n");
         for(i = 0 ; i < qtd_filmes ; i++){
 
@@ -520,7 +453,7 @@ void f_editar_filme(){
 
             if(consulta == filmes[i].identificador){
 
-
+            // Pedindo novas informações para atualização do filme
 
                 printf("Diga-me o identificador do novo filme: ");
                 setbuf(stdin,keyboard);
@@ -539,7 +472,8 @@ void f_editar_filme(){
 
                     printf("\nAno de produção inválido! \n\n");
                     system("pause");
-                    exit(1);
+                    system("cls");
+                    f_editar_filme(); // Se o ano de produção for inválido chama a função novamente!
                 }
 
                 printf("Diga-me o gênero do novo filme: ");
@@ -551,29 +485,29 @@ void f_editar_filme(){
             else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){
 
 
-                printf("Filme não encontrado... \n");
+                printf("Filme não encontrado... \n"); // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
             }
         }
 
 
         printf("\n\nAtualizar novamente? [1] - S | [2] - N : ");
-        scanf("%d",&escolha);
+        scanf("%d",&escolha); // Armazena a escolha do usuário
 
-        if(escolha == 1){
+        if(escolha == 1){ // Se ele digitar um a função de editar filmes é chamada novamente
 
 
             system("pause");
             system("cls");
             f_editar_filme();
         }
-        else if(escolha == 2){
+        else if(escolha == 2){  // Se 2 ele é direcionado para o menu
 
 
             system("pause");
             system("cls");
             menu_filme();
         }
-        else{
+        else{ // Caso ele digita um número que não pertença as opções acima
 
 
             printf("Valor não reconhecido... \n");
@@ -583,13 +517,13 @@ void f_editar_filme(){
         }
     }
 
-    else if(escolha == 2){
+    else if(escolha == 2){ // Se o número digitado for 2 então irá excluir o filme
 
 
 
 
         printf("Diga-me o identificador do filme a ser excluído: ");
-        scanf("%d",&consulta);
+        scanf("%d",&consulta); // Armazena o filme que o usuário digitou
 
         for(i = 0 ; i < qtd_filmes ; i++){
 
@@ -597,7 +531,7 @@ void f_editar_filme(){
 
             if(consulta == filmes[i].identificador){                 // "Apagando" Os filmes da Random Acess Memory
 
-
+                // Copia a posição x do vetor para a posição x+1
                 strcpy(filmes[i].genero,filmes[i+1].genero);
                 strcpy(filmes[i].titulo,filmes[i+1].titulo);
                 filmes[i].ano_de_producao = filmes[i+1].ano_de_producao;
@@ -609,29 +543,29 @@ void f_editar_filme(){
             else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){
 
 
-                printf("Filme não encontrado... \n");
+                printf("Filme não encontrado... \n"); // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
             }
         }
 
 
         printf("\n\nExcluir novamente? [1] - S | [2] - N : ");
-        scanf("%d",&escolha);
+        scanf("%d",&escolha); // Armazena a escolha do usuário
 
-        if(escolha == 1){
+        if(escolha == 1){ // Se ele digitar um a função de editar filmes é chamada novamente
 
 
             system("pause");
             system("cls");
             f_editar_filme();
         }
-        else if(escolha == 2){
+        else if(escolha == 2){ // Se 2 ele é direcionado para o menu
 
 
             system("pause");
             system("cls");
             menu_filme();
         }
-        else{
+        else{ // Caso ele digita um número que não pertença as opções acima
 
 
             printf("Valor não reconhecido... \n");
@@ -642,14 +576,14 @@ void f_editar_filme(){
 
     }
 
-    else if(escolha == 3){
+    else if(escolha == 3){ // Se o número digitado for 3 então irá voltar para o menu
 
 
         system("cls");
         menu_filme();
     }
 
-    else{
+    else{ // Caso ele digita um número diferente de 1 2 ou 3.
 
 
         printf("Valor inválido! \n");
@@ -659,7 +593,7 @@ void f_editar_filme(){
     }
 
 }
-void f_editar_clientes(){
+void f_editar_clientes(){ //Função para editar os clientes
 
 
 
@@ -667,22 +601,22 @@ void f_editar_clientes(){
     printf("\n======Editar os clientes=======\n\n");
 
     printf("O que você deseja? [1] - Atualizar cliente | [2] - Excluir cliente | [3] - Sair : ");
-    scanf("%d",&escolha);
+    scanf("%d",&escolha); // Armazena a opção do usuário
 
-    if(escolha == 1){
+    if(escolha == 1){ // Se o número digitado for 1 então irá atualizar o cliente
 
 
 
         printf("\nDiga-me o nome do cliente a ser atualizado: ");
-        scanf("%s",cliente_consulta);
+        scanf("%s",&cliente_consulta); // Variável responsável por armazenar e comparar o nome que o usuário digitar
         printf("\n");
         for(j = 0 ; j < qtd_clientes ; j++){
 
 
 
-            if(strcmp(cliente_consulta,clientes[i].nome) == 0){
+            if(strcmp(cliente_consulta,clientes[j].nome) == 0){ // Se o nome que o usuário digitou consta no sistema então ele atualizará
 
-
+            // Pedindo novas informações para atualização do cliente
 
                 printf("Diga-me o novo nome do [%i] cliente: ", j+1);
                 setbuf(stdin,keyboard);
@@ -697,53 +631,55 @@ void f_editar_clientes(){
 
                     printf("CPF Inválido! (Sem pontos ou traços) \n");
                     system("pause");
-                    exit(1);
+                    system("cls");
+                    f_editar_clientes(); // Se o CPF for inválido chama a função novamente!
                 }
 
                 printf("Diga-me o novo email do [%i] cliente: ", j+1);
                 setbuf(stdin,keyboard);
                 scanf("%29[^\n]s",clientes[j].email);
 
-                guardar = strrchr(clientes[j].email,'@');
+                guardar = strrchr(clientes[j].email,'@'); // Guarda a primeira ocorrência do @ na string do usuário
 
-                if( strcmp(guardar,validar_email[0]) != 0 ){
+                if( strcmp(guardar,validar_email[0]) != 0 ){ // Se o usuário não digitar a formatação de um email correto o programa fecha.
 
 
                     printf("Email inválido, Aceitamos somente o dominio gmail.com, também verifique o uso do '@' .\n");
                     system("pause");
-                    exit(1);
+                    system("cls");
+                    f_editar_clientes();
                 }
 
                 printf("\n\n");
                 printf("\nCliente atualizado com sucesso! \n");
             }
 
-            else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1){
+            else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1){ // Só executará a ação quando o laço for terminar
 
 
-                printf("Cliente não encontrado... \n");
+                printf("Cliente não encontrado... \n"); // Se o nome que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
             }
         }
 
 
         printf("\n\nAtualizar novamente? [1] - S | [2] - N : ");
-        scanf("%d",&escolha);
+        scanf("%d",&escolha); // Armazena a escolha do usuário
 
-        if(escolha == 1){
+        if(escolha == 1){  // Se ele digitar um a função de editar filmes é chamada novamente
 
 
             system("pause");
             system("cls");
             f_editar_clientes();
         }
-        else if(escolha == 2){
+        else if(escolha == 2){ // Se ele digitar dois é direcionado para o menu
 
 
             system("pause");
             system("cls");
             menu_cliente();
         }
-        else{
+        else{ // É executado somente se o usuário digitar um valor inválido
 
 
             printf("Valor não reconhecido... \n");
@@ -753,13 +689,13 @@ void f_editar_clientes(){
         }
     }
 
-    else if(escolha == 2){
+    else if(escolha == 2){ // Se o número digitado for 1 então irá excluir o cliente
 
 
 
 
         printf("Diga-me o nome do cliente a ser excluído: ");
-        scanf("%s",cliente_consulta);
+        scanf("%s",cliente_consulta); // Armazena o nome do cliente
 
         for(j = 0 ; j < qtd_clientes ; j++){
 
@@ -767,7 +703,7 @@ void f_editar_clientes(){
 
             if(strcmp(cliente_consulta,clientes[j].nome) == 0){             // "Apagando" Os usuários da Random Acess Memory
 
-
+                // Copia a posição x do vetor para a posição x+1
                 strcpy(clientes[j].nome,clientes[j+1].nome);
                 strcpy(clientes[j].cpf,clientes[j+1].cpf);
                 strcpy(clientes[j].email,clientes[j+1].email);
@@ -775,32 +711,32 @@ void f_editar_clientes(){
                 break;
             }
 
-            else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1 ){
+            else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1 ){ // Executa essa ação quando o laço for termina
 
 
-                printf("Cliente não encontrado... \n");
+                printf("Cliente não encontrado... \n"); // Se o nome que o usuário digitou não consta no sistema então exibirá essa mensagem
             }
         }
 
 
         printf("\n\nExcluir novamente? [1] - S | [2] - N : ");
-        scanf("%d",&escolha);
+        scanf("%d",&escolha); // Armazena a escolha do usuário
 
-        if(escolha == 1){
+        if(escolha == 1){ // Se ele digitar um a função de editar usuario é chamada novamente
 
 
             system("pause");
             system("cls");
             f_editar_clientes();
         }
-        else if(escolha == 2){
+        else if(escolha == 2){ // Se ele digitar dois é direcionado para o menu
 
 
             system("pause");
             system("cls");
             menu_cliente();
         }
-        else{
+        else{ // É executado somente se o usuário digitar um valor inválido
 
 
             printf("Valor não reconhecido... \n");
@@ -811,14 +747,14 @@ void f_editar_clientes(){
 
     }
 
-    else if(escolha == 3){
+    else if(escolha == 3){ // Se o usuário digitar 3 ele é direcionado para o menu
 
 
         system("cls");
         menu_cliente();
     }
 
-    else{
+    else{ // É executado somente se o usuário digitar um valor inválido
 
 
         printf("Valor inválido! \n");
@@ -828,11 +764,7 @@ void f_editar_clientes(){
     }
 
 }
-void menu_filme(){
-
-
-
-    if(ja_cadastrou == 0){
+void menu_filme(){ // Função do menu do filme
 
 
         printf("O que você deseja fazer? \n");
@@ -847,8 +779,6 @@ void menu_filme(){
         scanf("%d",&escolha);
 
         switch(escolha){
-
-
 
 
 
@@ -885,66 +815,9 @@ void menu_filme(){
             menu_filme();
 
         }
-    }
-    else{
-
-
-        printf("O que você deseja fazer? \n");
-        printf("[1] - Editar filme    \n");
-        printf("[2] - Listar filmes   \n");
-        printf("[3] - Visualizar filme \n");
-        printf("[4] - Consultar filme  \n");
-        printf("[5] - Voltar para o menu principal \n");
-        printf("[6] - Sair \n");
-        printf("Diga-me a opção: ");
-        scanf("%d",&escolha);
-
-        switch(escolha){
-
-
-
-
-
-        case 1:
-            system("cls");
-            f_editar_filme();
-            break;
-        case 2:
-            system("cls");
-            f_listar_filmes();
-            break;
-        case 3:
-            system("cls");
-            f_visualizar_filme();
-            break;
-        case 4:
-            system("cls");
-            f_consultar_filmes();
-            break;
-        case 5:
-            system("cls");
-            main();
-            break;
-        case 6:
-            break;
-        default:
-            printf("Opção não reconhecida... \n");
-            system("pause");
-            system("cls");
-            menu_filme();
-        }
-
-        return 0;
-    }
-
 }
 
-void menu_cliente(){
-
-
-
-    if(ja_cadastrou_cliente == 0){
-
+void menu_cliente(){ // Função do menu do cliente
 
         printf("O que você deseja fazer? \n");
         printf("[1] - Cadastrar cliente \n");
@@ -958,9 +831,6 @@ void menu_cliente(){
         scanf("%d",&escolha);
 
         switch(escolha){
-
-
-
 
 
         case 1:
@@ -996,62 +866,10 @@ void menu_cliente(){
             menu_cliente();
 
         }
-    }
-    else{
-
-
-        printf("O que você deseja fazer? \n");
-        printf("[1] - Editar cliente    \n");
-        printf("[2] - Listar clientes  \n");
-        printf("[3] - Visualizar cliente \n");
-        printf("[4] - Consultar cliente  \n");
-        printf("[5] - Voltar para o menu principal \n");
-        printf("[6] - Sair \n");
-        printf("Diga-me a opção: ");
-        scanf("%d",&escolha);
-
-        switch(escolha){
-
-
-
-
-
-        case 1:
-            system("cls");
-            f_editar_clientes();
-            break;
-        case 2:
-            system("cls");
-            f_listar_clientes();
-            break;
-        case 3:
-            system("cls");
-            f_visualizar_clientes();
-            break;
-        case 4:
-            system("cls");
-            f_consultar_clientes();
-            break;
-        case 5:
-            system("cls");
-            main();
-            break;
-        case 6:
-            break;
-        default:
-            printf("Opção não reconhecida... \n");
-            system("pause");
-            system("cls");
-            menu_cliente();
-        }
-
-        return 0;
-    }
-
 }
 
 
-int main(){
+int main(){ // Função principal
 
 
     setlocale(LC_ALL,"Portuguese"); // Permite acentos e outras regras da língua portuguesa em strings.
