@@ -16,11 +16,12 @@ char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer.
 
 //------ Variável globais -------//
 
-int qtd_filmes = 0, i = 0, qtd_clientes; //Aloca o tamanho do vetor.
+int qtd_filmes = 0, qtd_clientes = 0; //Aloca o tamanho do vetor.
+int i = 0, j = 0; // Variáveis usadas no FOR ( I = Filmes ) ( J = Clientes )
 int consulta; // Variável responsável por armazenar o identificador que é fornecido pelo usuário.
 char cliente_consulta[40]; // Variável responsável por armazenar o nome do cliente que é fornecido pelo usuário.
 int escolha; // Variável responsável pelo controle das opções da navegação.
-int ja_cadastrou = 0, ja_cadastrou_cliente; //Variáveis responsáveis por controlar o cadastro de filmes e clientes, você só poderá cadastrar uma vez.
+int ja_cadastrou = 0, ja_cadastrou_cliente = 0; //Variáveis responsáveis por controlar o cadastro de filmes e clientes, você só poderá cadastrar uma vez.
 char *guardar; // Variável que armazena o que existe depois do @ dentro de uma string
 char validar_email[1][30] = {"@gmail.com"}; // Variável criada para validar email do usuário <- 30 de tamanho para evitar erros de conflito com a variável email
 
@@ -123,20 +124,20 @@ void f_cadastrar_cliente(){
 
     printf("\n======Cadastro de cliente=======\n\n");
 
-    for(i = 0 ; i < qtd_clientes ; i++){
+    for(j = 0 ; j < qtd_clientes ; j++){
 
 
 
 
-        printf("Diga-me o nome do [%i] cliente: ", i+1);
+        printf("Diga-me o nome do [%i] cliente: ", j+1);
         setbuf(stdin,keyboard);
-        scanf("%39[^\n]s", clientes[i].nome);
+        scanf("%39[^\n]s", clientes[j].nome);
 
-        printf("Diga-me o cpf do [%i] cliente(Sem pontuação): ", i+1);
+        printf("Diga-me o cpf do [%i] cliente(Sem pontuação): ", j+1);
         setbuf(stdin,keyboard);
-        scanf("%11[^\n]s",clientes[i].cpf);
+        scanf("%11[^\n]s",clientes[j].cpf);
 
-        if(strlen(clientes[i].cpf) != 11){  //Verifica se o CPF contêm 11 números
+        if(strlen(clientes[j].cpf) != 11){  //Verifica se o CPF contêm 11 números
 
 
             printf("CPF Inválido! (Sem pontos ou traços) \n");
@@ -145,11 +146,11 @@ void f_cadastrar_cliente(){
             f_cadastrar_cliente();
         }
 
-        printf("Diga-me o email do [%i] cliente: ", i+1);
+        printf("Diga-me o email do [%i] cliente: ", j+1);
         setbuf(stdin,keyboard);
-        scanf("%29[^\n]s",clientes[i].email);
+        scanf("%29[^\n]s",clientes[j].email);
 
-        guardar = strrchr(clientes[i].email,'@');
+        guardar = strrchr(clientes[j].email,'@');
 
         if( strcmp(guardar,validar_email[0]) != 0 ){  // Se o usuário não digitar a formatação de um email correto o programa fecha.
 
@@ -162,29 +163,29 @@ void f_cadastrar_cliente(){
         printf("\n\n");
 
     }
-    for(i = 0 ; i < qtd_clientes ; i++){
+    for(j = 0 ; j < qtd_clientes ; j++){
 
 
 
-        if(strcmp(clientes[i].cpf,clientes[i+1].cpf) == 0 ){
+        if(strcmp(clientes[j].cpf,clientes[j+1].cpf) == 0 ){
 
 
             printf("Você inseriu clientes com cpf iguais.\n");
             system("cls");
             f_cadastrar_cliente();
         }
-        else if(strcmp(clientes[i].email,clientes[i+1].email) == 0  ){
+        else if(strcmp(clientes[j].email,clientes[j+1].email) == 0  ){
 
             printf("Você inseriu clientes com emails iguais.\n");
             system("cls");
             f_cadastrar_cliente();
         }
 
-        else if(strcmp(clientes[i].nome,clientes[i+1].nome) == 0){
+        else if(strcmp(clientes[j].nome,clientes[j+1].nome) == 0){
 
             printf("Você inseriu clientes com nomes iguais.\n");
-           system("cls");
-           f_cadastrar_cliente();
+            system("cls");
+            f_cadastrar_cliente();
         }
     }
 
@@ -234,18 +235,18 @@ void f_listar_clientes(){
     printf("\n======Listar os clientes=======\n\n");
 
 
-    for(i = 0 ; i < qtd_clientes ; i++){
+    for(j = 0 ; j < qtd_clientes ; j++){
 
 
 
-        if( strcmp(clientes[i].cpf,clientes[i+1].cpf ) == 0){   // Condição para não mostrar o cliente apagado.
+        if( strcmp(clientes[j].cpf,clientes[j+1].cpf ) == 0){   // Condição para não mostrar o cliente apagado.
 
 
             continue;
         }
-        printf("Nome [%s]:  \n",clientes[i].nome);
-        printf("CPF: [%s] \n",  clientes[i].cpf);
-        printf("Email: [%s] \n",clientes[i].email);
+        printf("Nome [%s]:  \n",clientes[j].nome);
+        printf("CPF: [%s] \n",  clientes[j].cpf);
+        printf("Email: [%s] \n",clientes[j].email);
         printf("\n\n");
     }
 
@@ -328,22 +329,22 @@ void f_consultar_clientes(){
 
     printf("\n");
 
-    for(i = 0 ; i < qtd_clientes ; i++){
+    for(j = 0 ; j < qtd_clientes ; j++){
 
 
 
-        if(strcmp(cliente_consulta,clientes[i+1].nome) == 0){
+        if(strcmp(cliente_consulta,clientes[j+1].nome) == 0){
 
             // Deixar sem nenhuma ação.
         }
 
-        if(strcmp(cliente_consulta,clientes[i].nome) == 0){
+        if(strcmp(cliente_consulta,clientes[j].nome) == 0){
 
 
             printf("Esse cliente está cadastrado em nossa locadora. \n");
             break;
         }
-        else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_clientes-1){   //Só executará a ação quando o laço for terminar
+        else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1){   //Só executará a ação quando o laço for terminar
 
 
             printf("Esse cliente não está cadastrado em nossa locadora. \n");
@@ -449,21 +450,21 @@ void f_visualizar_clientes(){
 
     printf("\n");
 
-    for(i = 0 ; i < qtd_clientes ; i++){
+    for(j = 0 ; j < qtd_clientes ; j++){
 
 
 
-        if(strcmp(cliente_consulta,clientes[i].nome) == 0){
+        if(strcmp(cliente_consulta,clientes[j].nome) == 0){
 
 
-            printf("Nome: [%s]:  \n",clientes[i].nome);
-            printf("CPF: [%s] \n",  clientes[i].cpf);
-            printf("Email: [%s] \n",clientes[i].email);
+            printf("Nome: [%s]:  \n",clientes[j].nome);
+            printf("CPF: [%s] \n",  clientes[j].cpf);
+            printf("Email: [%s] \n",clientes[j].email);
             printf("\n\n");
             break;
 
         }
-        else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_clientes-1 ){
+        else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1 ){
 
 
             printf("Cliente não encontrado. \n");
@@ -675,7 +676,7 @@ void f_editar_clientes(){
         printf("\nDiga-me o nome do cliente a ser atualizado: ");
         scanf("%s",cliente_consulta);
         printf("\n");
-        for(i = 0 ; i < qtd_clientes ; i++){
+        for(j = 0 ; j < qtd_clientes ; j++){
 
 
 
@@ -683,15 +684,15 @@ void f_editar_clientes(){
 
 
 
-                printf("Diga-me o novo nome do [%i] cliente: ", i+1);
+                printf("Diga-me o novo nome do [%i] cliente: ", j+1);
                 setbuf(stdin,keyboard);
-                scanf("%39[^\n]s", clientes[i].nome);
+                scanf("%39[^\n]s", clientes[j].nome);
 
-                printf("Diga-me o novo cpf do [%i] cliente(Sem pontuação): ", i+1);
+                printf("Diga-me o novo cpf do [%i] cliente(Sem pontuação): ", j+1);
                 setbuf(stdin,keyboard);
-                scanf("%11[^\n]s",clientes[i].cpf);
+                scanf("%11[^\n]s",clientes[j].cpf);
 
-                if(strlen(clientes[i].cpf) != 11){
+                if(strlen(clientes[j].cpf) != 11){
 
 
                     printf("CPF Inválido! (Sem pontos ou traços) \n");
@@ -699,11 +700,11 @@ void f_editar_clientes(){
                     exit(1);
                 }
 
-                printf("Diga-me o novo email do [%i] cliente: ", i+1);
+                printf("Diga-me o novo email do [%i] cliente: ", j+1);
                 setbuf(stdin,keyboard);
-                scanf("%29[^\n]s",clientes[i].email);
+                scanf("%29[^\n]s",clientes[j].email);
 
-                guardar = strrchr(clientes[i].email,'@');
+                guardar = strrchr(clientes[j].email,'@');
 
                 if( strcmp(guardar,validar_email[0]) != 0 ){
 
@@ -717,7 +718,7 @@ void f_editar_clientes(){
                 printf("\nCliente atualizado com sucesso! \n");
             }
 
-            else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_clientes-1){
+            else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1){
 
 
                 printf("Cliente não encontrado... \n");
@@ -760,21 +761,21 @@ void f_editar_clientes(){
         printf("Diga-me o nome do cliente a ser excluído: ");
         scanf("%s",cliente_consulta);
 
-        for(i = 0 ; i < qtd_clientes ; i++){
+        for(j = 0 ; j < qtd_clientes ; j++){
 
 
 
-            if(strcmp(cliente_consulta,clientes[i].nome) == 0){             // "Apagando" Os usuários da Random Acess Memory
+            if(strcmp(cliente_consulta,clientes[j].nome) == 0){             // "Apagando" Os usuários da Random Acess Memory
 
 
-                strcpy(clientes[i].nome,clientes[i+1].nome);
-                strcpy(clientes[i].cpf,clientes[i+1].cpf);
-                strcpy(clientes[i].email,clientes[i+1].email);
+                strcpy(clientes[j].nome,clientes[j+1].nome);
+                strcpy(clientes[j].cpf,clientes[j+1].cpf);
+                strcpy(clientes[j].email,clientes[j+1].email);
                 printf("Cliente excluído com sucesso! \n");
                 break;
             }
 
-            else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_clientes-1 ){
+            else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1 ){
 
 
                 printf("Cliente não encontrado... \n");
