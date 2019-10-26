@@ -57,7 +57,7 @@ void f_cadastrar_filme(){
     filmes[qtd_filmes]; // Alocando o tamanho do vetor
 
     printf("\n======Cadastro de filmes=======\n\n");
-    ++ja_cadastrou;
+
     for(i = 0 ; i < qtd_filmes ; i++){
 
 
@@ -80,7 +80,8 @@ void f_cadastrar_filme(){
 
             printf("\nAno de produção inválido! \n\n");
             system("pause");
-            exit(1);
+            system("cls");
+            f_cadastrar_filme();
         }
 
         printf("Diga-me o gênero do [%i] filme: ", i+1);
@@ -99,12 +100,13 @@ void f_cadastrar_filme(){
 
             printf("Você inseriu filmes com identificadores iguais.\n");
             system("pause");
-            exit(1);
+            system("cls");
+            f_cadastrar_filme();
         }
     }
 
 
-
+   ++ja_cadastrou;
     system("pause"); // Dar uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
     menu_filme();    // Chamada de função
@@ -120,7 +122,7 @@ void f_cadastrar_cliente(){
     clientes[qtd_clientes];
 
     printf("\n======Cadastro de cliente=======\n\n");
-    ++ja_cadastrou_cliente;
+
     for(i = 0 ; i < qtd_clientes ; i++){
 
 
@@ -139,7 +141,8 @@ void f_cadastrar_cliente(){
 
             printf("CPF Inválido! (Sem pontos ou traços) \n");
             system("pause");
-            exit(1);
+            system("cls");
+            f_cadastrar_cliente();
         }
 
         printf("Diga-me o email do [%i] cliente: ", i+1);
@@ -152,8 +155,8 @@ void f_cadastrar_cliente(){
 
 
             printf("Email inválido, Aceitamos somente o dominio gmail.com, também verifique o uso do '@' .\n");
-            system("pause");
-            exit(1);
+            system("cls");
+            f_cadastrar_cliente();
         }
 
         printf("\n\n");
@@ -167,26 +170,26 @@ void f_cadastrar_cliente(){
 
 
             printf("Você inseriu clientes com cpf iguais.\n");
-            system("pause");
-            exit(1);
+            system("cls");
+            f_cadastrar_cliente();
         }
         else if(strcmp(clientes[i].email,clientes[i+1].email) == 0  ){
 
             printf("Você inseriu clientes com emails iguais.\n");
-            system("pause");
-            exit(1);
+            system("cls");
+            f_cadastrar_cliente();
         }
 
         else if(strcmp(clientes[i].nome,clientes[i+1].nome) == 0){
 
             printf("Você inseriu clientes com nomes iguais.\n");
-            system("pause");
-            exit(1);
+           system("cls");
+           f_cadastrar_cliente();
         }
     }
 
 
-
+  ++ja_cadastrou_cliente;
     system("pause");
     system("cls");
     menu_cliente();
@@ -837,7 +840,8 @@ void menu_filme(){
         printf("[3] - Listar filmes   \n");
         printf("[4] - Visualizar filme \n");
         printf("[5] - Consultar filme  \n");
-        printf("[6] - Sair \n");
+        printf("[6] - Voltar para o menu principal \n");
+        printf("[7] - Sair \n");
         printf("Diga-me a opção: ");
         scanf("%d",&escolha);
 
@@ -868,6 +872,10 @@ void menu_filme(){
             f_consultar_filmes();
             break;
         case 6:
+            system("cls");
+            main();
+            break;
+        case 7:
             break;
         default:
             printf("Opção não reconhecida... \n");
@@ -885,7 +893,8 @@ void menu_filme(){
         printf("[2] - Listar filmes   \n");
         printf("[3] - Visualizar filme \n");
         printf("[4] - Consultar filme  \n");
-        printf("[5] - Sair \n");
+        printf("[5] - Voltar para o menu principal \n");
+        printf("[6] - Sair \n");
         printf("Diga-me a opção: ");
         scanf("%d",&escolha);
 
@@ -912,6 +921,10 @@ void menu_filme(){
             f_consultar_filmes();
             break;
         case 5:
+            system("cls");
+            main();
+            break;
+        case 6:
             break;
         default:
             printf("Opção não reconhecida... \n");
@@ -938,7 +951,8 @@ void menu_cliente(){
         printf("[3] - Listar clientes   \n");
         printf("[4] - Visualizar cliente \n");
         printf("[5] - Consultar cliente  \n");
-        printf("[6] - Sair \n");
+        printf("[6] - Voltar para o menu principal \n");
+        printf("[7] - Sair \n");
         printf("Diga-me a opção: ");
         scanf("%d",&escolha);
 
@@ -969,6 +983,10 @@ void menu_cliente(){
             f_consultar_clientes();
             break;
         case 6:
+            system("cls");
+            main();
+            break;
+        case 7:
             break;
         default:
             printf("Opção não reconhecida... \n");
@@ -986,7 +1004,8 @@ void menu_cliente(){
         printf("[2] - Listar clientes  \n");
         printf("[3] - Visualizar cliente \n");
         printf("[4] - Consultar cliente  \n");
-        printf("[5] - Sair \n");
+        printf("[5] - Voltar para o menu principal \n");
+        printf("[6] - Sair \n");
         printf("Diga-me a opção: ");
         scanf("%d",&escolha);
 
@@ -1013,6 +1032,10 @@ void menu_cliente(){
             f_consultar_clientes();
             break;
         case 5:
+            system("cls");
+            main();
+            break;
+        case 6:
             break;
         default:
             printf("Opção não reconhecida... \n");
