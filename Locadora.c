@@ -2,6 +2,7 @@
 #include <locale.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer.
 
 //------ Documentação -------//
@@ -51,10 +52,41 @@ void f_cadastrar_filme(){ // Função para cadastrar os filmes
 
     printf("\n======Cadastro de filmes=======\n\n");
 
+    int identificador; // Serve para armazenar o identificador do filme e comparar com o identificador da struct
+    int booleana = 0; // Servirá para o controle do if/else da verificação de identificadores cadastrados (0 false) - (1 - True)
 
         printf("Diga-me o identificador do filme: ");
         setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
-        scanf("%d", &filmes[qtd_filmes].identificador);
+        scanf("%d", &identificador);
+        // Identificador menor que zero
+        if(identificador <= 0){ // Se o identificador for negativo então, a função é chamada novamente
+            printf("\n\nInforme um identificador positivo ou não nulo! \n");
+            system("pause");
+            system("cls");
+            f_cadastrar_filme();
+        }
+        // Verificação de identificadores iguais
+        if(qtd_filmes < 20){ // O usuário só pode cadastrar 20 filmes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
+
+        for(i = 0 ; i < qtd_filmes ; i++){ // Laço para ver se existe um identificador igual a um que já está cadastrado no sistema
+            if(identificador == filmes[i].identificador) // Se o identificador que o usuário informar for igual a um identificador em uma posição X do meu struct
+                booleana = 1; // Então a booleana recebe 1 ( True )
+        }
+        if(booleana == 1){ // Se a booleana for igual a 1 quer dizer que esse identificador já existe no sistema
+            printf("Filme já cadastrado!\n");
+            system("pause");
+            system("cls");
+            f_cadastrar_filme(); // Se o identificador for inválido chama a função novamente!
+        }
+        else{ // Se a booleana não for 1 então o identificador não existe no sistema, o meu struct st_filmes na variável identificador, recebe o identificador que o usuário informou.
+            filmes[qtd_filmes].identificador = identificador;
+        }
+        }else{ // Caso ele já tenha cadastrado 20 filmes, então ele volta para o menu
+            printf("\n\nVocê já cadastrou o número máximo de filmes! \n");
+            system("pause");
+            system("cls");
+            menu_filme();
+        }
 
         printf("Diga-me o título do filme: ");
         setbuf(stdin,keyboard);
@@ -66,19 +98,24 @@ void f_cadastrar_filme(){ // Função para cadastrar os filmes
 
         if(filmes[qtd_filmes].ano_de_producao > 2019 || filmes[qtd_filmes].ano_de_producao < 1895){     // Faz com que o usuário não digite um ano de produção que não exista.
 
-            printf("\nAno de produção inválido! \n\n");
+            printf("\nAno de produção inválido! \n\n"); // Se o ano de produção for menor que 1895 irei chamar a função novamente, porém com alguns detalhes...
             system("pause");
             system("cls");
-            f_cadastrar_filme(); // Se o ano de produção for inválido chama a função novamente!
+            if(qtd_filmes >= 1){ // Se o usuário já estiveer cadastrado algum filme quando o ano de produção informado por ele for inválido, então eu diminuo 1 na qtd_filmes, pois estou chamando a função novamente
+                --qtd_filmes;
+                f_cadastrar_filme();
+            }else{ // Se ele ainda não tiver cadastrado um filme quando o ano de produção informado por ele for inválido, então eu somente coloco a qtd_filmes = 0 ( Seto ela )
+                qtd_filmes = 0;
+                f_cadastrar_filme();}
+
+
         }
         printf("Diga-me o gênero do filme: ");
         setbuf(stdin,keyboard);
         scanf("%14[^\n]s",&filmes[i].genero);
 
         printf("\n\n");
-
-++qtd_filmes; // Após o usuário cadastrar o filme essa variável é incrementada, fazendo que conte quantos filmes foram cadastrados.
-
+ ++qtd_filmes; // Após o usuário cadastrar o filme essa variável é incrementada, fazendo que conte quantos filmes foram cadastrados.
     system("pause"); // Da uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
     menu_filme();    // Chamada de função
@@ -142,14 +179,14 @@ void f_listar_filmes(){ // Função para listar os filmes
 
 
 
-        if(filmes[i].identificador == filmes[i+1].identificador){   // Condição para não mostrar o filme apagado.
+        if(filmes[i].identificador == filmes[i+1].identificador || filmes[i].identificador == 0 ){   // Condição para não mostrar o filme apagado.
 
 
             continue; // Se o filme existir na memória, então as linhas de baixo não são executadas.
         }
-        printf("Título: [%s] \n", filmes[i].titulo);
+        printf("Título: [%s] \n", filmes[i].titulo); // o i+1 Serve para evitar o bug do desaparecimento do título.
         printf("Gênero: [%s] \n", filmes[i].genero);
-        printf("Ano de produção: [%d]\n", filmes[i].ano_de_producao);
+        printf("Ano de produção: [%d]\n", filmes[i].ano_de_producao); // o i+1 Serve para evitar o  bug do desaparecimento do ano de produção
         printf("Identificador: [%d]\n", filmes[i].identificador);
         printf("\n\n");
     }
@@ -203,7 +240,7 @@ void f_consultar_filmes(){ // Função para consultar os filmes
 
 
 
-        if(filmes[i].identificador == filmes[i+1].identificador){   // Condição para não mostrar o filme apagado.
+        if(filmes[i].identificador == filmes[i+1].identificador || filmes[i].identificador == 0){   // Condição para não mostrar o filme apagado.
 
 
             // Deixar sem nenhuma ação.
@@ -326,7 +363,7 @@ void f_visualizar_filme(){ // Função para visualizar o filme
 
 
 
-        if(consulta == filmes[i].identificador){
+        if(consulta == filmes[i].identificador && consulta != 0){ // Faz com que não mostre o lixo da memória!
 
 
             printf("Filme [%i]:  \n",i+1);
@@ -338,7 +375,7 @@ void f_visualizar_filme(){ // Função para visualizar o filme
             break;
 
         }
-        else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){ //Só executará a ação quando o laço for terminar
+        else if(consulta != filmes[i].identificador && i == qtd_filmes-1 || consulta == 0){ //Só executará a ação quando o laço for terminar
 
 
             printf("Filme não encontrado. \n"); // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
@@ -433,7 +470,8 @@ void f_visualizar_clientes(){ // Função para visualizar o cliente
 void f_editar_filme(){ // Função para editar o filme
 
 
-
+ int identificador; // Serve para armazenar o identificador do filme e comparar com o identificador da struct
+ int booleana = 0; // Servirá para o controle do if/else da verificação de identificadores cadastrados (0 false) - (1 - True)
 
     printf("\n======Editar os filmes=======\n\n");
 
@@ -457,7 +495,30 @@ void f_editar_filme(){ // Função para editar o filme
 
                 printf("Diga-me o identificador do novo filme: ");
                 setbuf(stdin,keyboard);
-                scanf("%d", &filmes[i].identificador);
+                scanf("%d", &identificador);
+
+
+            if(identificador <= 0){ // Se o identificador for negativo então, a função é chamada novamente
+            printf("\n\nInforme um identificador positivo ou não nulo! \n");
+            system("pause");
+            system("cls");
+            f_editar_filme();
+            }
+
+            for(int i = 0 ; i < qtd_filmes ; i++){ // Laço para ver se existe um identificador igual a um que já está cadastrado no sistema
+                // É criado um novo "i" para percorrer somente nesse for e não se intrometer nos demais.
+            if(identificador == filmes[i].identificador) // Se o identificador que o usuário informar for igual a um identificador em uma posição X do meu struct
+                booleana = 1; // Então a booleana recebe 1 ( True )
+        }
+        if(booleana == 1){ // Se a booleana for igual a 1 quer dizer que esse identificador já existe no sistema
+            printf("Identificador do filme já está cadastrado no sistema!\n\n");
+            system("pause");
+            exit(1);
+        }
+        else{ // Se a booleana não for 1 então o identificador não existe no sistema, o meu struct st_filmes na variável identificador, recebe o identificador que o usuário informou.
+            filmes[i].identificador = identificador;
+        }
+
 
                 printf("Diga-me o título do novo filme: ");
                 setbuf(stdin,keyboard);
@@ -473,7 +534,7 @@ void f_editar_filme(){ // Função para editar o filme
                     printf("\nAno de produção inválido! \n\n");
                     system("pause");
                     system("cls");
-                    f_editar_filme(); // Se o ano de produção for inválido chama a função novamente!
+                    exit(1); // Se o ano de produção for inválido o programa é fechado!
                 }
 
                 printf("Diga-me o gênero do novo filme: ");
@@ -807,7 +868,7 @@ void menu_filme(){ // Função do menu do filme
             main();
             break;
         case 7:
-            break;
+            exit(1); // Fecha o programa
         default:
             printf("Opção não reconhecida... \n");
             system("pause");
