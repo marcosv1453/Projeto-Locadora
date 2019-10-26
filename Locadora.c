@@ -18,7 +18,7 @@ char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer.
 
 int i = 0, j = 0; // Variáveis usadas no FOR ( I = Filmes ) ( J = Clientes )
 int qtd_filmes = 0, qtd_clientes = 0; // Conta a quantidade de clientes ou filmes cadastrados.
-int consulta; // Variável responsável por armazenar o identificador que é fornecido pelo usuário.
+int consulta; // Variável responsável por armazenar e comparar o identificador que é fornecido pelo usuário.
 char cliente_consulta[40]; // Variável responsável por armazenar e comparar o nome do cliente que é fornecido pelo usuário no menu de atualização.
 int escolha; // Variável responsável pelo controle das opções da navegação.
 char *guardar; // Variável que armazena o que existe depois do @ dentro de uma string
