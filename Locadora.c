@@ -19,10 +19,16 @@ char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer
 //------ Variável globais -------//
 
 int i = 0, j = 0; // Variáveis usadas no FOR ( I = Filmes ) ( J = Clientes )
-int qtd_filmes = 0, qtd_clientes = 0; // Conta a quantidade de clientes ou filmes cadastrados.
+
+int qtd_filmes = 0, qtd_clientes = 0; // Controla a ação dos for, é usado para controle de indice dentro de array
+
+int filme = 0, cliente = 0;// Usado para contar a quantidade de clientes ou filmes cadastrados
+
 int consulta; // Variável responsável por armazenar e comparar o identificador que é fornecido pelo usuário.
 char cliente_consulta[40]; // Variável responsável por armazenar e comparar o nome do cliente que é fornecido pelo usuário no menu de atualização.
+
 int escolha; // Variável responsável pelo controle das opções da navegação.
+
 char *guardar; // Variável que armazena o que existe depois do @ dentro de uma string
 char validar_email[2][30] = {"@gmail.com","@hotmail.com"}; // Variável criada para validar email do usuário <- 30 de tamanho para evitar erros de conflito com a variável email do struct filmes
 
@@ -71,7 +77,7 @@ void f_cadastrar_filme(){  // Função para cadastrar os filmes
         f_cadastrar_filme();
     }
     // Verificação de identificadores iguais
-    if(qtd_filmes < 20){  // O usuário só pode cadastrar 20 filmes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
+    if(filme < 20){  // O usuário só pode cadastrar 20 filmes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
 
 
         for(i = 0 ; i < qtd_filmes ; i++){  // Laço para ver se existe um identificador igual a um que já está cadastrado no sistema
@@ -121,6 +127,7 @@ void f_cadastrar_filme(){  // Função para cadastrar os filmes
 
     printf("\n\n");
     ++qtd_filmes; // Após o usuário cadastrar o filme essa variável é incrementada, fazendo que conte quantos filmes foram cadastrados.
+    ++filme; // Conta quantos filmes foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
     system("pause"); // Da uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
     menu_filme();    // Chamada de função
@@ -139,7 +146,7 @@ void f_cadastrar_cliente(){  // Função para cadastrar clientes
 
     printf("\n======Cadastro de cliente=======\n\n");
 
-    if(qtd_clientes < 20){  // O usuário só pode cadastrar 20 clientes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 clientes.
+    if(cliente < 20){  // O usuário só pode cadastrar 20 clientes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 clientes.
 
         printf("Diga-me o nome do cliente: ");
         setbuf(stdin,keyboard); // Usando o setbuf para tirar o lixo da entrada
@@ -217,7 +224,7 @@ void f_cadastrar_cliente(){  // Função para cadastrar clientes
     printf("\n\n");
 
     ++qtd_clientes; // Após o usuário cadastrar o cliente essa variável é incrementada, fazendo que conte quantos clientes foram cadastrados.
-
+    ++cliente; // Conta quantos clientes foram cadastrados é a partir disso vê se o limite de clientes cadastrados passou da meta, ou não.
     system("pause"); // Da uma pausa para a próxima linha de comando
     system("cls");   // Limpa o console
     menu_cliente();  // Chama a função de menu dos clientes
@@ -708,12 +715,12 @@ void f_editar_filme(){  // Função para editar o filme
 
                 // Faz com que o identificador fique nulo, assim parecendo que foi apagado da memória e não mostrrando nos menus.
                 filmes[i].identificador = 0;
-                --qtd_filmes; // Remove um filme
+                --filme; // Remove um filme
                 printf("Filme excluído com sucesso! \n");
                 break;
             }
 
-            else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){
+            else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){ // Só executa a ação quando o laço for terminar
 
 
 
@@ -934,7 +941,7 @@ void f_editar_clientes(){  //Função para editar os clientes
 
                 // Faz com que o identificador fique nulo, assim parecendo que foi apagado da memória e não mostrrando nos menus.
                 strcpy(clientes[j].nome,"");
-                --qtd_clientes; // Remove um cliente
+                --cliente; // Remove um cliente
                 printf("Cliente excluído com sucesso! \n");
                 break;
             }
