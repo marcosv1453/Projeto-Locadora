@@ -184,11 +184,16 @@ void f_listar_filmes(){ // Função para listar os filmes
 
             continue; // Se o filme existir na memória, então as linhas de baixo não são executadas.
         }
-        printf("Título: [%s] \n", filmes[i].titulo); // o i+1 Serve para evitar o bug do desaparecimento do título.
-        printf("Gênero: [%s] \n", filmes[i].genero);
-        printf("Ano de produção: [%d]\n", filmes[i].ano_de_producao); // o i+1 Serve para evitar o  bug do desaparecimento do ano de produção
-        printf("Identificador: [%d]\n", filmes[i].identificador);
-        printf("\n\n");
+        if(i == 0){ // Essa if só irá repetir uma vez, fazendo a formatação mais correta.
+        printf(" Título                                       Gênero               Ano de produção   Identificador   \n");
+        printf("|-------------------------------------------|--------------------|------------------|---------------|\n");
+        }
+        printf("|[%s]",filmes[i].titulo);
+        printf("\t\t\t\t\t[%s]",filmes[i].genero);
+        printf("\t\t[%d]",filmes[i].ano_de_producao);
+        printf("\t\t[%d]\n",filmes[i].identificador);
+        printf("|-------------------------------------------|--------------------|------------------|---------------|");
+        printf("\n");
     }
 
     system("pause"); // Da uma pausa antes da próxima linha de comando
@@ -543,7 +548,7 @@ void f_editar_filme(){ // Função para editar o filme
                 printf("\nFilme atualizado com sucesso! \n");
                 break;
             }
-            else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){
+            else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){ // Só executará a ação quando o laço for terminar
 
 
                 printf("Filme não encontrado... \n"); // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
