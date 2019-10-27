@@ -22,7 +22,7 @@ int i = 0, j = 0; // Variáveis usadas no FOR ( I = Filmes ) ( J = Clientes )
 
 int qtd_filmes = 0, qtd_clientes = 0; // Controla a ação dos for, é usado para controle de indice dentro de array
 
-int filme = 0, cliente = 0;// Usado para contar a quantidade de clientes ou filmes cadastrados
+int filme = 0, cliente = 0;// Usado para contar a quantidade de clientes ou filmes cadastrados.
 
 int consulta; // Variável responsável por armazenar e comparar o identificador que é fornecido pelo usuário.
 char cliente_consulta[40]; // Variável responsável por armazenar e comparar o nome do cliente que é fornecido pelo usuário no menu de atualização.
