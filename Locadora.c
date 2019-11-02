@@ -46,6 +46,7 @@ struct st_filmes{   // Struct para armazenar os filmes;
 
 
 
+
     int identificador;
     char titulo[40];
     int ano_de_producao;
@@ -583,7 +584,6 @@ void f_consultar_estoque(){  // Função para consultar o estoque
 
         if(estoques[i].identificador_do_filme == -1 ){}  // Condição para não mostrar o filme do estoqueapagado.
 
-
         if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0){
 
 
@@ -592,7 +592,7 @@ void f_consultar_estoque(){  // Função para consultar o estoque
             printf("O filme existe em nosso estoque. \n");
             break;
         }
-        else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0 && i == qtd_estoque ){     //Só executará a ação quando o laço for terminar
+        else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0 && i == qtd_estoque+1 ){     //Só executará a ação quando o laço for terminar
 
 
 
@@ -1412,7 +1412,7 @@ void f_editar_estoque(){  // Função para editar o estoque
 
                 // Faz com que o identificador fique nulo, assim parecendo que foi apagado da memória e não mostrrando nos menus.
                 estoques[i].identificador_do_filme = -1;
-                --estoque; // Remove um filme do estoque
+                estoque-= estoques[i].qtd_copias[i];// Remove um filme do estoque
                 printf("Filme excluído com sucesso! \n");
                 break;
             }
