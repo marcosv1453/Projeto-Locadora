@@ -21,11 +21,11 @@ char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer
 int i = 0, j = 0; // Variáveis usadas no FOR ( I = Filmes ) ( J = Clientes )
 
 
-int qtd_filmes = 0, qtd_clientes = 0, qtd_estoque = 0; // Controla a ação dos for, é usado para controle de indice dentro de array
+int qtd_filmes = 0, qtd_clientes = 0, qtd_estoque = 0; // Controla a ação dos for, é usado para controle de indice dentro de array / e para contar os elementos
 
-int filme = 0, cliente = 0, estoque = 0;// Usado para contar a quantidade de clientes/filmes/estqoue cadastrados
+int estoque = 0;// Usado para contar a quantidade de/estqoue cadastrados
 
-int qtd_copias = 0; // Guarda a qtd de cópias de um determinado filme que o usuário irá inserir.
+
 
 int consulta; // Variável responsável por armazenar e comparar o identificador que é fornecido pelo usuário.
 char cliente_consulta[40]; // Variável responsável por armazenar e comparar o nome do cliente que é fornecido pelo usuário no menu de atualização.
@@ -50,7 +50,7 @@ struct st_filmes{   // Struct para armazenar os filmes;
     char titulo[40];
     int ano_de_producao;
     char genero[15];
-} filmes[20]; // Inciializando o Struct com um vetor de 20 de tamanho, você só poderá cadastrar 20 filmes
+} filmes[20]; // Inicializando o Struct com um vetor de 20 de tamanho, você só poderá cadastrar 20 filmes
 struct st_clientes{   // Struct para armazenar os clientes;
 
 
@@ -65,14 +65,17 @@ struct st_clientes{   // Struct para armazenar os clientes;
 struct st_estoque{  // Struct para estocar os filmes;
 
 
-
-    int identificador;
     int identificador_do_filme;
     char data_de_entrada[TAMANHO][10]; // Matriz com para armazenar 100 datas cada uma com 10 de tamanho
 
+    char titulo_estoque[40];
+    int ano_de_producao_estoque;
+    char genero_estoque[40];
+    int qtd_copias[TAMANHO]; // Guarda a qtd de cópias de um determinado filme que o usuário irá inserir.
 
 
-} estoques[TAMANHO]; // Inicializando o Struct com um vetord e 100 de tamanho, você só podera estocar 100 filmes
+
+} estoques[TAMANHO]; // Inicializando o Struct com um vetor de 100 de tamanho, você só podera estocar 100 filmes
 
 void f_cadastrar_filme(){   // Função para cadastrar os filmes
 
@@ -81,54 +84,7 @@ void f_cadastrar_filme(){   // Função para cadastrar os filmes
 
     printf("\n======Cadastro de filmes=======\n\n");
 
-    int identificador; // Serve para armazenar o identificador do filme e comparar com o identificador da struct
-    int booleana = 0; // Servirá para o controle do if/else da verificação de identificadores cadastrados (0 false) - (1 - True)
-
-    printf("Diga-me o identificador do filme: ");
-    setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
-    scanf("%d", &identificador);
-    // Identificador menor que zero
-    if(identificador <= 0){   // Se o identificador for negativo então, a função é chamada novamente
-
-
-        printf("\n\nInforme um identificador positivo ou não nulo! \n");
-        system("pause");
-        system("cls");
-        f_cadastrar_filme();
-    }
-    // Verificação de identificadores iguais
-    if(filme < 20){   // O usuário só pode cadastrar 20 filmes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
-
-
-
-        for(i = 0 ; i < qtd_filmes ; i++){   // Laço para ver se existe um identificador igual a um que já está cadastrado no sistema
-
-
-            if(identificador == filmes[i].identificador) // Se o identificador que o usuário informar for igual a um identificador em uma posição X do meu struct
-                booleana = 1; // Então a booleana recebe 1 ( True )
-        }
-        if(booleana == 1){   // Se a booleana for igual a 1 quer dizer que esse identificador já existe no sistema
-
-
-            printf("Filme já cadastrado!\n");
-            system("pause");
-            system("cls");
-            f_cadastrar_filme(); // Se o identificador for inválido chama a função novamente!
-        }
-        else{   // Se a booleana não for 1 então o identificador não existe no sistema, o meu struct st_filmes na variável identificador, recebe o identificador que o usuário informou.
-
-
-            filmes[qtd_filmes].identificador = identificador;
-        }
-    }
-    else{    // Caso ele já tenha cadastrado 20 filmes, então ele volta para o menu
-
-
-        printf("\n\nVocê já cadastrou o número máximo de filmes! \n");
-        system("pause");
-        system("cls");
-        menu_filme();
-    }
+    if(qtd_filmes < 20){   // O usuário só pode cadastrar 20 filmes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
 
     printf("Diga-me o título do filme: ");
     setbuf(stdin,keyboard);
@@ -151,13 +107,24 @@ void f_cadastrar_filme(){   // Função para cadastrar os filmes
     setbuf(stdin,keyboard);
     scanf("%14[^\n]s",&filmes[i].genero);
 
+    filmes[qtd_filmes].identificador = qtd_filmes; // Primeiro identificador é igual a 0
+
     printf("\n\n");
     ++qtd_filmes; // Após o usuário cadastrar o filme essa variável é incrementada, fazendo que conte quantos filmes foram cadastrados.
-    ++filme; // Conta quantos filmes foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
     printf("\nCadastro realizado com sucesso!\n"); // Exibe uma mensagem ao finalizar um cadastro
     system("pause"); // Da uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
     menu_filme();    // Chamada de função
+
+}
+   else{ // Caso ele já tenha cadastrado 20 filmes, então ele volta para o menu
+
+        printf("\n\nVocê já cadastrou o número máximo de filmes! \n");
+        system("pause");
+        system("cls");
+        menu_filme();
+    }
+
 
 }
 void f_cadastrar_cliente(){   // Função para cadastrar clientes
@@ -172,7 +139,7 @@ void f_cadastrar_cliente(){   // Função para cadastrar clientes
 
     printf("\n======Cadastro de cliente=======\n\n");
 
-    if(cliente < 20){   // O usuário só pode cadastrar 20 clientes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 clientes.
+    if(qtd_clientes < 20){   // O usuário só pode cadastrar 20 clientes, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 clientes.
 
 
         printf("Diga-me o nome do cliente: ");
@@ -199,7 +166,7 @@ void f_cadastrar_cliente(){   // Função para cadastrar clientes
             }
         }
 
-        if(strlen(cpfeador[qtd_clientes]) != 11 || e_digito == 0 ){    //Verifica se o CPF contêm 11 números, se não tiver a função é chamada novamente.
+        if(strlen(cpfeador[qtd_clientes]) != 11 || e_digito == 1 ){    //Verifica se o CPF contêm 11 números, se não tiver a função é chamada novamente.
 
 
             printf("CPF Inválido!(Sem pontos ou traços)!/Somente números! \n");
@@ -261,7 +228,6 @@ void f_cadastrar_cliente(){   // Função para cadastrar clientes
     printf("\n\n");
 
     ++qtd_clientes; // Após o usuário cadastrar o cliente essa variável é incrementada, fazendo que conte quantos clientes foram cadastrados.
-    ++cliente; // Conta quantos clientes foram cadastrados é a partir disso vê se o limite de clientes cadastrados passou da meta, ou não.
     printf("\nCadastro realizado com sucesso!\n"); // Exibe uma mensagem ao finalizar o cadastro.
     system("pause"); // Da uma pausa para a próxima linha de comando
     system("cls");   // Limpa o console
@@ -280,16 +246,6 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
     setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
     scanf("%d", &estoques[qtd_estoque].identificador_do_filme);
 
-    // Identificador menor que zero
-    if(estoques[qtd_estoque].identificador_do_filme <= 0){   // Se o identificador for negativo então, a função é chamada novamente
-
-
-        printf("\n\nInforme um identificador positivo ou não nulo! \n");
-        system("pause");
-        system("cls");
-        menu_estoque();
-    }
-
 
     // Verificação de identificadores iguais
     if(estoque < TAMANHO){   // O usuário só pode cadastrar 100 filmes no estoque, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
@@ -300,17 +256,20 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
             if(filmes[i].identificador == estoques[qtd_estoque].identificador_do_filme){  // Verifica se o identificador que o usuário cadastrou é igual aos filmes já cadastrados
 
                 booleana = 1; // Caso exista o filme, então ele poderá cadastrar no estoque
+                qtd_estoque = estoques[qtd_estoque].identificador_do_filme; //Atribui a qtd do estoque a partir do identificador do filme
             }
         }
         if(booleana == 1){
 
-            printf("O filme existe em nosso catálogo, irei cadastrar uma cópia física para sua locadora. \n\n");
-            qtd_copias++;
+            printf("O filme existe em nosso catálogo, Quantas copias deseja registrar? : ");
+            setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
+            scanf("%d",&estoques[qtd_estoque].qtd_copias[qtd_estoque]);
+
             printf("Diga-me a data de entrada desse filme no estoque (xx/xx/xxxx): ");
             setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
-            scanf("%s",&estoques[qtd_estoque].data_de_entrada);
+            scanf("%s",&estoques[qtd_estoque].data_de_entrada[qtd_estoque]);
 
-            if(strlen(estoques[qtd_estoque].data_de_entrada) != 10 ){  // Verifica se a data de entrega é válida
+            if(strlen(estoques[qtd_estoque].data_de_entrada[qtd_estoque]) != 10 ){  // Verifica se a data de entrega é válida
 
 
                 printf("Data de entrada do estoque inválida (xx/xx/xxxx)\n");
@@ -340,8 +299,18 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
     }
 
     printf("\n\n");
-    ++qtd_estoque; // Após o usuário cadastrar o filme no estoque essa variável é incrementada, fazendo que conte quantos filmes foram cadastrados.
-    estoque+=qtd_copias; // Conta quantos filmes no estoque foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
+
+
+
+            // Conseguindo os valores dos filmes e passando para o estoque
+            strcpy(estoques[qtd_estoque].titulo_estoque,filmes[qtd_estoque].titulo);
+            strcpy(estoques[qtd_estoque].genero_estoque,filmes[qtd_estoque].genero);
+            estoques[qtd_estoque].ano_de_producao_estoque = filmes[qtd_estoque].ano_de_producao;
+
+
+
+
+    estoque+=estoques[qtd_estoque].qtd_copias[qtd_estoque]; // Conta quantos filmes no estoque foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
     printf("\nEstoque do filme realizado com sucesso!\n"); // Exibe uma mensagem ao finalizar um cadastro
     system("pause"); // Da uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
@@ -368,13 +337,11 @@ void f_listar_filmes(){   // Função para listar os filmes
 
 
 
-        if(filmes[i].identificador == filmes[i+1].identificador || filmes[i].identificador == 0 ){     // Condição para não mostrar o filme apagado.
-
-
-
+        if(filmes[i].identificador == -1 ){     // Condição para não mostrar o filme apagado.
 
             continue; // Se o filme existir na memória, então as linhas de baixo não são executadas.
         }
+
         printf("|[%s]",filmes[i].titulo);
         printf("\t\t\t\t\t[%s]",filmes[i].genero);
         printf("\t\t[%d]",filmes[i].ano_de_producao);
@@ -407,7 +374,7 @@ void f_listar_clientes(){   // Função para listar os clientes
 
 
 
-        if( strcmp(clientes[j].cpf,clientes[j+1].cpf ) == 0 || strlen(clientes[j].nome) == 0){     // Condição para não mostrar o cliente apagado.
+        if(strlen(clientes[j].nome) == 0){     // Condição para não mostrar o cliente apagado.
 
 
 
@@ -431,27 +398,22 @@ void f_listar_estoque(){  // Função para listar o estoque
 
     printf("\n======Listar os filmes no estoque=======\n\n");
 
-    printf(" Título                                       Gênero               Ano de produção   Data de entrada   \n");
-    printf("|-------------------------------------------|--------------------|------------------|---------------|\n");
-    for(i = 0 ; i < qtd_estoque ; i++){
+    printf(" Título                                       Gênero               Ano de produção   Data de entrada Qtd de cópias \n");
+    printf("|-------------------------------------------|--------------------|------------------|---------------|-------------|\n");
+    for(i = 0 ; i <= qtd_estoque ; i++){
 
 
-
-
-
-        if(estoques[i].identificador_do_filme == 0 ){     // Condição para não mostrar o filme do estoque apagado.
-
-
-
+        if(estoques[i].identificador_do_filme == -1 ){     // Condição para não mostrar o filme do estoque apagado.
 
             continue; // Se o filme existir na memória, então as linhas de baixo não são executadas.
         }
 
-        printf("|[%s]",filmes[qtd_filmes-1].titulo);
-        printf("\t\t\t\t\t[%s]",filmes[qtd_filmes-1].genero);
-        printf("\t\t[%d]",filmes[qtd_filmes-1].ano_de_producao);
-        printf("\t\t[%s]\n",estoques[qtd_estoque-1].data_de_entrada);
-        printf("|-------------------------------------------|--------------------|------------------|---------------|");
+        printf("|[%s]",estoques[i].titulo_estoque);
+        printf("\t\t\t\t\t[%s]",estoques[i].genero_estoque);
+        printf("\t\t[%d]",estoques[i].ano_de_producao_estoque);
+        printf("\t\t[%s]",estoques[i].data_de_entrada[i]);
+        printf("\t[%d]\n",estoques[i].qtd_copias[i]);
+    printf("|-------------------------------------------|--------------------|------------------|---------------|-------------|");
         printf("\n");
 
     }
@@ -478,29 +440,15 @@ void f_consultar_filmes(){   // Função para consultar os filmes
 
     for(i = 0 ; i < qtd_filmes ; i++){
 
+        if(filmes[i].identificador == -1){}     // Condição para não mostrar o filme apagado.
 
-
-
-
-        if(filmes[i].identificador == filmes[i+1].identificador || filmes[i].identificador == 0){     // Condição para não mostrar o filme apagado.
-
-
-
-
-            // Deixar sem nenhuma ação.
-        }
-
-        if(consulta == filmes[i].identificador && consulta != 0){
-
-
+        if(consulta == filmes[i].identificador){
 
 
             printf("O filme existe em nosso catálogo. \n");
             break;
         }
         else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){     //Só executará a ação quando o laço for terminar
-
-
 
 
             printf("O filme não existe em nosso catálogo. \n"); // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
@@ -562,12 +510,7 @@ void f_consultar_clientes(){   // Função para consultar os clientes
 
 
 
-        if(strcmp(cliente_consulta,clientes[j+1].nome) == 0 || strlen(clientes[j].nome) == 0){
-
-
-
-            // Deixar sem nenhuma ação.
-        }
+        if(strlen(clientes[j].nome) == 0){}
 
         if(strcmp(cliente_consulta,clientes[j].nome) == 0){
 
@@ -718,7 +661,7 @@ void f_visualizar_filme(){   // Função para visualizar o filme
 
 
 
-        if(consulta == filmes[i].identificador && consulta != 0){   // Faz com que não mostre o lixo da memória!
+        if(consulta == filmes[i].identificador){
 
 
 
@@ -732,7 +675,7 @@ void f_visualizar_filme(){   // Função para visualizar o filme
             break;
 
         }
-        else if(consulta != filmes[i].identificador && i == qtd_filmes-1 || consulta == 0){   //Só executará a ação quando o laço for terminar
+        else if(consulta != filmes[i].identificador && i == qtd_filmes-1){   //Só executará a ação quando o laço for terminar
 
 
 
@@ -924,11 +867,6 @@ void f_visualizar_estoque(){  // Função para visualizar item no estoque
 void f_editar_filme(){   // Função para editar o filme
 
 
-
-
-    int identificador; // Serve para armazenar o identificador do filme e comparar com o identificador da struct
-    int booleana = 0; // Servirá para o controle do if/else da verificação de identificadores cadastrados (0 false) - (1 - True)
-
     printf("\n======Editar os filmes=======\n\n");
 
     printf("O que você deseja? [1] - Atualizar filme | [2] - Excluir filme | [3] - Sair : ");
@@ -947,47 +885,11 @@ void f_editar_filme(){   // Função para editar o filme
 
 
 
-
-
             if(consulta == filmes[i].identificador){
 
 
 
                 // Pedindo novas informações para atualização do filme
-
-                printf("Diga-me o identificador do novo filme: ");
-                setbuf(stdin,keyboard);
-                scanf("%d", &identificador);
-
-
-                if(identificador <= 0){   // Se o identificador for negativo então, a função é chamada novamente
-
-
-                    printf("\n\nInforme um identificador positivo ou não nulo! \n");
-                    system("pause");
-                    system("cls");
-                    f_editar_filme();
-                }
-
-                for(int i = 0 ; i < qtd_filmes ; i++){   // Laço para ver se existe um identificador igual a um que já está cadastrado no sistema
-
-
-                    // É criado um novo "i" para percorrer somente nesse for e não se intrometer nos demais.
-                    if(identificador == filmes[i].identificador) // Se o identificador que o usuário informar for igual a um identificador em uma posição X do meu struct
-                        booleana = 1; // Então a booleana recebe 1 ( True )
-                }
-                if(booleana == 1){   // Se a booleana for igual a 1 quer dizer que esse identificador já existe no sistema
-
-
-                    printf("Identificador do filme já está cadastrado no sistema!\n\n");
-                    system("pause");
-                    exit(1);
-                }
-                else{   // Se a booleana não for 1 então o identificador não existe no sistema, o meu struct st_filmes na variável identificador, recebe o identificador que o usuário informou.
-
-
-                    filmes[i].identificador = identificador;
-                }
 
 
                 printf("Diga-me o título do novo filme: ");
@@ -999,8 +901,6 @@ void f_editar_filme(){   // Função para editar o filme
                 scanf("%d",&filmes[i].ano_de_producao);
 
                 if(filmes[i].ano_de_producao > 2019 || filmes[i].ano_de_producao < 1895){       // Faz com que o usuário não digite um ano de produção que não exista.
-
-
 
 
                     printf("\nAno de produção inválido! \n\n");
@@ -1080,7 +980,7 @@ void f_editar_filme(){   // Função para editar o filme
 
                 // Faz com que o identificador fique nulo, assim parecendo que foi apagado da memória e não mostrrando nos menus.
                 filmes[i].identificador = 0;
-                --filme; // Remove um filme
+                --qtd_filmes; // Remove um filme
                 printf("Filme excluído com sucesso! \n");
                 break;
             }
@@ -1334,7 +1234,7 @@ void f_editar_clientes(){   //Função para editar os clientes
                 strcpy(clientes[j].nome,"");
                 strcpy(clientes[j].cpf,"");
                 strcpy(clientes[j].email,"");
-                --cliente; // Remove um cliente
+                --qtd_clientes; // Remove um cliente
                 printf("Cliente excluído com sucesso! \n");
                 break;
             }
