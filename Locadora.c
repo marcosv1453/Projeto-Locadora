@@ -70,7 +70,7 @@ struct st_estoque{  // Struct para estocar os filmes;
 
     char titulo_estoque[40];
     int ano_de_producao_estoque;
-    char genero_estoque[40];
+    char genero_estoque[15];
     int qtd_copias[TAMANHO]; // Guarda a qtd de cópias de um determinado filme que o usuário irá inserir.
 
 
@@ -563,34 +563,28 @@ void f_consultar_clientes(){   // Função para consultar os clientes
 
 
 }
+
 void f_consultar_estoque(){  // Função para consultar o estoque
-
-
 
 
 
     printf("\n======Consultar o estoque=======\n\n");
 
     printf("Diga-me o nome do filme a ser consultado: ");
-    scanf("%d",&estoque_consulta); // Armazena o nome do estoque que o usuário digitou
+    scanf("%s",&estoque_consulta); // Armazena o nome do estoque que o usuário digitou
 
     printf("\n");
 
-    for(i = 0 ; i < qtd_estoque ; i++){
+    for(i = 0 ; i <= qtd_estoque ; i++){
 
 
 
 
 
-        if(estoques[i].identificador_do_filme == 0 ){     // Condição para não mostrar o filme do estoqueapagado.
+        if(estoques[i].identificador_do_filme == -1 ){}  // Condição para não mostrar o filme do estoqueapagado.
 
 
-
-
-            // Deixar sem nenhuma ação.
-        }
-
-        if(strcmp(estoque_consulta,filmes[i].titulo) == 0){
+        if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0){
 
 
 
@@ -598,7 +592,7 @@ void f_consultar_estoque(){  // Função para consultar o estoque
             printf("O filme existe em nosso estoque. \n");
             break;
         }
-        else if(strcmp(estoque_consulta,filmes[i].titulo) != 0 && i == qtd_filmes-1 ){     //Só executará a ação quando o laço for terminar
+        else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0 && i == qtd_estoque ){     //Só executará a ação quando o laço for terminar
 
 
 
@@ -797,35 +791,29 @@ void f_visualizar_estoque(){  // Função para visualizar item no estoque
 
     printf("\n======Visualizar o estoque=======\n\n");
 
-    printf("Diga-me o identificador do filme a ser visualizado: ");
-    scanf("%d",&consulta); // Armazena o identificador que o usuário digitou
+    printf("Diga-me o nome do filme a ser visualizado: ");
+    scanf("%s",estoque_consulta); // Armazena o nome do estoque que o usuário digitou
 
     printf("\n");
 
-    for(i = 0 ; i < qtd_estoque ; i++){
+    for(i = 0 ; i <= qtd_estoque ; i++){
 
 
-
-
-
-        if(consulta == estoques[i].identificador_do_filme && consulta != 0){   // Faz com que não mostre o lixo da memória!
-
+        if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0 && strcmp(estoque_consulta,"") != 0){
 
 
 
             printf("Filme [%i]:  \n",i+1);
-            printf("Título: [%s] \n", filmes[qtd_filmes-1].titulo);
-            printf("Gênero: [%s] \n", filmes[qtd_filmes-1].genero);
-            printf("Ano de produção: [%d]\n", filmes[qtd_filmes-1].ano_de_producao);
-            printf("Data de entrada: [%s]\n", estoques[qtd_estoque-1].data_de_entrada);
+            printf("Título: [%s]\n",estoques[i].titulo_estoque);
+            printf("Gênero: [%s]\n",estoques[i].genero_estoque);
+            printf("Ano de produção: [%d]\n",estoques[i].ano_de_producao_estoque);
+            printf("Data de entrada: [%s]\n",estoques[i].data_de_entrada[i]);
+            printf("Quantidade de cópias: [%d]\n",estoques[i].qtd_copias[i]);
             printf("\n\n");
             break;
 
         }
-        else if(consulta != estoques[i].identificador_do_filme && i == qtd_filmes-1 || consulta == 0){   //Só executará a ação quando o laço for terminar
-
-
-
+        else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0 && i == qtd_estoque+1){   //Só executará a ação quando o laço for terminar
 
             printf("Filme não encontrado no estoque. \n"); // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
         }
@@ -1318,13 +1306,11 @@ void f_editar_estoque(){  // Função para editar o estoque
     if(escolha == 1){   // Se o número digitado for 1 então irá atualizar o filme no estoque
 
 
-
-
-
         printf("\nDiga-me o identificador do filme a ser atualizado: ");
         scanf("%d",&consulta);  // Armazena o filme que o usuário digitou
         printf("\n");
-        for(i = 0 ; i < qtd_estoque ; i++){
+
+        for(i = 0 ; i <= qtd_estoque ; i++){
 
 
 
@@ -1336,30 +1322,15 @@ void f_editar_estoque(){  // Função para editar o estoque
 
                 // Pedindo novas informações para atualização do filme
 
-                printf("Diga-me o identificador do novo filme: ");
+                printf("Diga-me o título do novo filme do estoque: ");
                 setbuf(stdin,keyboard);
-                scanf("%d", &estoques[i].identificador_do_filme);
+                scanf("%39[^\n]s",estoques[i].titulo_estoque);
 
-
-                if(identificador <= 0){   // Se o identificador for negativo então, a função é chamada novamente
-
-
-                    printf("\n\nInforme um identificador positivo ou não nulo! \n");
-                    system("pause");
-                    system("cls");
-                    f_editar_estoque();
-                }
-
-
-                printf("Diga-me o título do novo filme: ");
+                printf("Diga-me o ano de produção do novo filme do estoque: ");
                 setbuf(stdin,keyboard);
-                scanf("%39[^\n]s",filmes[i].titulo);
+                scanf("%d",&estoques[i].ano_de_producao_estoque);
 
-                printf("Diga-me o ano de produção do novo filme: ");
-                setbuf(stdin,keyboard);
-                scanf("%d",&filmes[i].ano_de_producao);
-
-                if(filmes[i].ano_de_producao > 2019 || filmes[i].ano_de_producao < 1895){       // Faz com que o usuário não digite um ano de produção que não exista.
+                if(estoques[i].ano_de_producao_estoque > 2019 || estoques[i].ano_de_producao_estoque < 1895){       // Faz com que o usuário não digite um ano de produção que não exista.
 
 
 
@@ -1372,11 +1343,11 @@ void f_editar_estoque(){  // Função para editar o estoque
 
                 printf("Diga-me o gênero do novo filme: ");
                 setbuf(stdin,keyboard);
-                scanf("%14[^\n]s",filmes[i].genero);
+                scanf("%14[^\n]s",estoques[i].genero_estoque);
                 printf("\nFilme atualizado com sucesso! \n");
                 break;
             }
-            else if(consulta != estoques[i].identificador_do_filme && i == qtd_filmes-1 ){   // Só executará a ação quando o laço for terminar
+            else if(consulta != estoques[i].identificador_do_filme && i == qtd_estoque ){   // Só executará a ação quando o laço for terminar
 
 
 
@@ -1429,7 +1400,7 @@ void f_editar_estoque(){  // Função para editar o estoque
         printf("Diga-me o identificador do filme a ser excluído: ");
         scanf("%d",&consulta); // Armazena o filme que o usuário digitou
 
-        for(i = 0 ; i < qtd_estoque ; i++){
+        for(i = 0 ; i <= qtd_estoque ; i++){
 
 
 
@@ -1440,13 +1411,13 @@ void f_editar_estoque(){  // Função para editar o estoque
 
 
                 // Faz com que o identificador fique nulo, assim parecendo que foi apagado da memória e não mostrrando nos menus.
-                estoques[i].identificador_do_filme = 0;
+                estoques[i].identificador_do_filme = -1;
                 --estoque; // Remove um filme do estoque
                 printf("Filme excluído com sucesso! \n");
                 break;
             }
 
-            else if(consulta != estoques[i].identificador_do_filme && i == qtd_filmes-1 ){  // Só executa a ação quando o laço for terminar
+            else if(consulta != estoques[i].identificador_do_filme && i == qtd_filmes ){  // Só executa a ação quando o laço for terminar
 
 
 
@@ -1461,26 +1432,17 @@ void f_editar_estoque(){  // Função para editar o estoque
 
         if(escolha == 1){   // Se ele digitar um a função de excluir filmes no estoque é chamada novamente
 
-
-
-
             system("pause");
             system("cls");
             f_editar_estoque();
         }
         else if(escolha == 2){   // Se 2 ele é direcionado para o menu
 
-
-
-
             system("pause");
             system("cls");
             menu_estoque();
         }
         else{   // Caso ele digita um número que não pertença as opções acima
-
-
-
 
             printf("Valor não reconhecido... \n");
             system("pause");
