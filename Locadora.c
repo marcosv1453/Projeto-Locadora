@@ -6,43 +6,44 @@
 
 char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer
 
-// Program in STACK (LIFO)
+
 
 //------ Documentação -------//
 
 /**
-*@author ---
-*@version ---
-*@since ---
+*@author Eduardo José
+*@version 1.0.0
+*@since 22/10/19
+*@see Program in STACK (LIFO)
+*@link https://github.com/Duduxs
 */
 
 //------ Documentação -------//
 
 //------ Variável globais -------//
 
+
+int escolha;      // Variável responsável pelo controle das opções da navegação.
 int i = 0, j = 0; // Variáveis usadas no FOR ( I = Filmes ) ( J = Clientes )
 
+int consulta;              // Variável responsável por armazenar e comparar o identificador que é fornecido pelo usuário.
+char cliente_consulta[40]; // Variável responsável por armazenar e comparar o nome do cliente que é fornecido pelo usuário
+char estoque_consulta[40]; // Variável responsável por armazenar e comparar o nome do estoque que é fornecido pelo usuário
 
-int qtd_filmes = 0, qtd_clientes = 0, qtd_estoque = 0; // Controla a ação dos for, é usado para controle de indice dentro de array / e para contar os elementos
-
-int estoque = 0;// Usado para contar a quantidade de/estqoue cadastrados
-
-
-
-int consulta; // Variável responsável por armazenar e comparar o identificador que é fornecido pelo usuário.
-char cliente_consulta[40]; // Variável responsável por armazenar e comparar o nome do cliente que é fornecido pelo usuário no menu de atualização.
-char estoque_consulta[40]; // Variável responsável por armazenar e comparar o nome do estoque que é fornecido pelo usuário no menu de atualização
-
-int escolha; // Variável responsável pelo controle das opções da navegação.
-
-char *guardar; // Variável que armazena o que existe depois do @ dentro de uma string
+char *guardar;                                             // Variável que armazena o que existe depois do @ dentro de uma string
 char validar_email[2][30] = {"@gmail.com","@hotmail.com"}; // Variável criada para validar email do usuário <- 30 de tamanho para evitar erros de conflito com a variável email do struct filmes
+
+
+int qtd_filmes = 0, qtd_clientes = 0, qtd_estoque = 0, qtd_aluguel = 0;     // Controla a ação dos for, é usado para controle de indice dentro de array  e para contar os elementos
+int estoque = 0;                                                           // Usado para guardar a quantidade de filmes estqoue cadastrados
+
 
 #define TAMANHO 100 // Define o tamanho da qtd de filmes para cadastro no estoque
 
+
 //----- Variável globais -------//
 
-struct st_filmes{   // Struct para armazenar os filmes;
+struct st_filmes{                                   // Struct para armazenar os filmes;                            \
 
 
 
@@ -54,7 +55,7 @@ struct st_filmes{   // Struct para armazenar os filmes;
     int ano_de_producao;
     char genero[15];
 } filmes[20]; // Inicializando o Struct com um vetor de 20 de tamanho, você só poderá cadastrar 20 filmes
-struct st_clientes{   // Struct para armazenar os clientes;
+struct st_clientes{                                // Struct para armazenar os clientes;
 
 
 
@@ -65,7 +66,7 @@ struct st_clientes{   // Struct para armazenar os clientes;
 
 
 } clientes[20]; // Inciializando o Struct com um vetor de 20 de tamanho, você só poderá cadastrar 20 clientes
-struct st_estoque{  // Struct para estocar os filmes;
+struct st_estoque{                                // Struct para estocar os filmes;
 
 
     int identificador_do_filme;
@@ -80,8 +81,16 @@ struct st_estoque{  // Struct para estocar os filmes;
 
 
 } estoques[TAMANHO]; // Inicializando o Struct com um vetor de 100 de tamanho, você só podera estocar 100 filmes
+typedef struct{                                  // Struct para armazenar os alugueis;
 
-void f_cadastrar_filme(){   // Função para cadastrar os filmes
+    int identificador;
+    char identificador_do_estoque[40]; // Identifica o filme no estoque pelo nome
+    char identificador_do_cliente[40]; // Identifica o cliente pelo nome
+    char data_de_aluguel[10];
+    char data_da_devolucao[10];
+}st_aluguel;
+
+void f_cadastrar_filme(){                      // Função para cadastrar os filmes
 
 
 
@@ -131,7 +140,7 @@ void f_cadastrar_filme(){   // Função para cadastrar os filmes
 
 
 }
-void f_cadastrar_cliente(){   // Função para cadastrar clientes
+void f_cadastrar_cliente(){                   // Função para cadastrar clientes
 
 
 
@@ -238,12 +247,16 @@ void f_cadastrar_cliente(){   // Função para cadastrar clientes
     menu_cliente();  // Chama a função de menu dos clientes
 
 }
-void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
+void f_cadastrar_estoque(){                  // Função para cadastrar filmes no estoque
 
 
     printf("\n======Cadastro do estoque=======\n\n");
 
     int booleana = 0; // Servirá para o controle do for da verificação de identificadores cadastrados (0 false) - (1 - True)
+
+
+
+    if(estoque < TAMANHO){   // O usuário só pode cadastrar 100 filmes no estoque, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
 
     // Pegando o identificador do filme que ele deseja cadastrar no estoque
     printf("Diga-me o identificador do filme para entrar no estoque: ");
@@ -251,16 +264,13 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
     scanf("%d", &estoques[0].identificador_do_filme);
 
 
-    // Verificação de identificadores iguais
-    if(estoque < TAMANHO){   // O usuário só pode cadastrar 100 filmes no estoque, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
-
-
         for(i = 0 ; i < qtd_filmes ; i++){  // Conta de 0 até a quantidade de filmes já cadastrados no menu de filmes
-
+               // Verificação de identificadores iguais
             if(filmes[i].identificador == estoques[qtd_estoque].identificador_do_filme){  // Verifica se o identificador que o usuário cadastrou é igual aos filmes já cadastrados
 
                 booleana = 1; // Caso exista o filme, então ele poderá cadastrar no estoque
                 qtd_estoque = estoques[0].identificador_do_filme; //Atribui a qtd do estoque a partir do identificador do filme
+
             }
         }
         if(booleana == 1){
@@ -316,6 +326,7 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
 
 
 
+
     estoque += estoques[qtd_estoque].qtd_copias[qtd_estoque]; // Conta quantos filmes no estoque foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
     printf("\nEstoque do filme realizado com sucesso!\n"); // Exibe uma mensagem ao finalizar um cadastro
     system("pause"); // Da uma pausa antes de executar a próxima linha de comando
@@ -326,8 +337,50 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
 
 
 }
+void f_cadastar_aluguel_por_cliente(){      // Função para cadastrar aluguel por cliente
 
-void f_listar_filmes(){   // Função para listar os filmes
+st_aluguel alugar[TAMANHO]; // Criando um vetor com 100 de tamanho
+
+printf("\n======Cadastro de aluguel de filme por cliente=======\n\n");
+
+
+    if(qtd_aluguel < TAMANHO){   // O cliente pode cadastrar até 100 filmes, essa verificação ocorrerá enquanto ele ainda não tiver cadastrado o número máximo de filmes.
+
+    printf("Diga-me o nome do cliente: ");
+    setbuf(stdin,keyboard);
+    scanf("%39[^\n]s",&alugar[qtd_aluguel].identificador_do_cliente);  // Pegando o input da forma correta, sem o \n
+
+    printf("Diga-me o nome do filme: ");
+    setbuf(stdin,keyboard);
+    scanf("%39[^\n]s",&alugar[qtd_aluguel].identificador_do_estoque);
+
+    printf("Diga-me o gênero do filme: ");
+    setbuf(stdin,keyboard);
+    scanf("%14[^\n]s",&filmes[i].genero);
+
+    filmes[qtd_filmes].identificador = qtd_filmes; // Primeiro identificador é igual a 0
+
+    printf("\n\n");
+    ++qtd_filmes; // Após o usuário cadastrar o filme essa variável é incrementada, fazendo que conte quantos filmes foram cadastrados.
+    printf("\nCadastro realizado com sucesso!\n"); // Exibe uma mensagem ao finalizar um cadastro
+    system("pause"); // Da uma pausa antes de executar a próxima linha de comando
+    system("cls");   // Limpa o console
+    menu_aluguel();    // Chamada de função
+
+}
+   else{ // Caso ele já tenha alugado 100 filmes, então ele volta para o menu
+
+        printf("\n\nVocê já alugou o número máximo de filmes! \n");
+        system("pause");
+        system("cls");
+        menu_aluguel();
+    }
+
+
+}
+
+
+void f_listar_filmes(){                  // Função para listar os filmes
 
 
 
@@ -364,7 +417,7 @@ void f_listar_filmes(){   // Função para listar os filmes
 
 
 }
-void f_listar_clientes(){   // Função para listar os clientes
+void f_listar_clientes(){               // Função para listar os clientes
 
 
 
@@ -399,9 +452,11 @@ void f_listar_clientes(){   // Função para listar os clientes
     menu_cliente();  // Chama a função novamente
 
 }
-void f_listar_estoque(){  // Função para listar o estoque
+void f_listar_estoque(){               // Função para listar o estoque
 
-printf("%d",estoque);
+printf("%d\n",estoque);
+printf("%d\n",estoques[0].identificador_do_filme);
+printf("%d",estoques[1].identificador_do_filme);
     printf("\n======Listar os filmes no estoque=======\n\n");
 
     printf(" Título                                       Gênero               Ano de produção   Data de entrada Qtd de cópias \n");
@@ -419,6 +474,7 @@ printf("%d",estoque);
         printf("\t\t[%d]",estoques[i].ano_de_producao_estoque);
         printf("\t\t[%s]",estoques[i].data_de_entrada[i]);
         printf("\t[%d]\n",estoques[i].soma_copias[i]);
+        printf("%d\n",estoques[i].identificador_do_filme);
     printf("|-------------------------------------------|--------------------|------------------|---------------|-------------|");
         printf("\n");
 
@@ -431,7 +487,7 @@ printf("%d",estoque);
 
 }
 
-void f_consultar_filmes(){   // Função para consultar os filmes
+void f_consultar_filmes(){           // Função para consultar os filmes
 
 
 
@@ -495,7 +551,7 @@ void f_consultar_filmes(){   // Função para consultar os filmes
 
 
 }
-void f_consultar_clientes(){   // Função para consultar os clientes
+void f_consultar_clientes(){        // Função para consultar os clientes
 
 
 
@@ -569,7 +625,7 @@ void f_consultar_clientes(){   // Função para consultar os clientes
 
 
 }
-void f_consultar_estoque(){  // Função para consultar o estoque
+void f_consultar_estoque(){        // Função para consultar o estoque
 
     printf("\n======Consultar o estoque=======\n\n");
 
@@ -638,7 +694,7 @@ void f_consultar_estoque(){  // Função para consultar o estoque
 
 }
 
-void f_visualizar_filme(){   // Função para visualizar o filme
+void f_visualizar_filme(){       // Função para visualizar o filme
 
 
 
@@ -785,7 +841,7 @@ void f_visualizar_clientes(){   // Função para visualizar o cliente
     }
 
 }
-void f_visualizar_estoque(){  // Função para visualizar item no estoque
+void f_visualizar_estoque(){   // Função para visualizar item no estoque
 
 
 
@@ -854,7 +910,7 @@ void f_visualizar_estoque(){  // Função para visualizar item no estoque
 
 }
 
-void f_editar_filme(){   // Função para editar o filme
+void f_editar_filme(){       // Função para editar o filme
 
 
     printf("\n======Editar os filmes=======\n\n");
@@ -1294,7 +1350,7 @@ void f_editar_clientes(){   //Função para editar os clientes
     }
 
 }
-void f_editar_estoque(){  // Função para editar o estoque
+void f_editar_estoque(){   // Função para editar o estoque
 
 
 
@@ -1471,7 +1527,7 @@ void f_editar_estoque(){  // Função para editar o estoque
 
 }
 
-void menu_filme(){   // Função do menu do filme
+void menu_filme(){       // Função do menu do filme
 
 
 
@@ -1527,7 +1583,7 @@ void menu_filme(){   // Função do menu do filme
 
     }
 }
-void menu_cliente(){   // Função do menu do cliente
+void menu_cliente(){    // Função do menu do cliente
 
 
 
@@ -1581,7 +1637,7 @@ void menu_cliente(){   // Função do menu do cliente
 
     }
 }
-void menu_estoque(){  // Função do menu do estoque
+void menu_estoque(){   // Função do menu do estoque
 
     printf("O que você deseja fazer? \n");
     printf("[1] - Cadastrar filme no estoque \n");
@@ -1635,9 +1691,67 @@ void menu_estoque(){  // Função do menu do estoque
     }
 
 }
+void menu_aluguel(){  // Função do menu do aluguel
+
+    printf("O que você deseja fazer? \n");
+    printf("[1] - Alugar filme  \n");
+    printf("[2] - Alugar filme por cliente \n");
+    printf("[3] - Listar filmes alugados   \n");
+    printf("[4] - Listar filmes alugados por cliente \n");
+    printf("[5] - Visualizar aluguel   \n");
+    printf("[6] - Visualizar aluguel por cliente \n");
+    printf("[7] - Voltar para o menu principal \n");
+    printf("[8] - Sair \n");
+    printf("Diga-me a opção: ");
+    scanf("%d",&escolha);
+
+    switch(escolha){
 
 
-int main(){   // Função principal
+
+
+
+    case 1:
+        system("cls");
+        f_cadastrar_estoque();
+        break;
+    case 2:
+        system("cls");
+        f_cadastar_aluguel_por_cliente();
+        break;
+    case 3:
+        system("cls");
+        f_listar_estoque();
+        break;
+    case 4:
+        system("cls");
+        f_visualizar_estoque();
+        break;
+    case 5:
+        system("cls");
+        f_consultar_estoque();
+        break;
+    case 6:
+        system("cls");
+        f_consultar_estoque();
+    case 7:
+        system("cls");
+        main();
+        break;
+    case 8:
+         exit(1); // Fecha o programa
+    default:
+        printf("Opção não reconhecida... \n");
+        system("pause");
+        system("cls");
+        menu_aluguel();
+
+    }
+
+
+}
+
+int main(){        // Função principal
 
 
 
@@ -1648,7 +1762,8 @@ int main(){   // Função principal
     printf("[1] - Entrar no menu da locadora \n");
     printf("[2] - Entrar no menu do cliente \n");
     printf("[3] - Entrar no menu do estoque \n");
-    printf("[4] - Sair \n");
+    printf("[4] - Entrar no menu do aluguel \n");
+    printf("[5] - Sair \n");
     printf("Escolha a opção: ");
     scanf("%d",&escolha);
 
@@ -1670,6 +1785,9 @@ int main(){   // Função principal
         menu_estoque();
         break;
     case 4:
+        system("cls");
+        menu_aluguel();
+    case 5:
         break;
     default:
         printf("Opção não reconhecida... \n");
