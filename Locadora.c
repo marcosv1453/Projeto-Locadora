@@ -23,22 +23,26 @@ char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer
 //-----------------------------------------------------Variáveis Globais-----------------------------------------------------------------//
 
 
-int escolha;      // Variável responsável pelo controle das opções da navegação.
-int i = 0, j = 0; // Variáveis usadas no FOR ( I = Filmes ) ( J = Clientes )
+int escolha;                                               // Variável responsável pelo controle das opções da navegação.                
+int i = 0, j = 0;                                          // Variáveis usadas no for ( I = Filmes ) ( J = Clientes )
 
-int consulta;              // Variável responsável por armazenar e comparar o identificador que é fornecido pelo usuário.
-char cliente_consulta[40]; // Variável responsável por armazenar e comparar o nome do cliente que é fornecido pelo usuário
-char estoque_consulta[40]; // Variável responsável por armazenar e comparar o nome do estoque que é fornecido pelo usuário
+int consulta;                                              // Armazena e compara o ID que é fornecido pelo usuário.
+char cliente_consulta[40];                                 // Armazena e compara o nome que é fornecido pelo usuário.
+char estoque_consulta[40];                                 // Armazena e compara o nome do estoque que é fornecido pelo usuário.
 
 char *guardar;                                             // Variável que armazena o que existe depois do @ dentro de uma string
-char validar_email[2][30] = {"@gmail.com","@hotmail.com"}; // Variável criada para validar email do usuário <- 30 de tamanho para evitar erros de conflito com a variável email do struct filmes
+char validar_email[2][30] = {"@gmail.com","@hotmail.com"}; // Variável criada para validar email do usuário.
 
 
-int qtd_filmes = 0, qtd_clientes = 0, qtd_estoque = 0, qtd_aluguel = 0;     // Controla a ação dos for, é usado para controle de indice dentro de array  e para contar os elementos
-int estoque = 0;                                                           // Usado para guardar a quantidade de filmes estqoue cadastrados
+int qtd_filmes = 0;                                        // Controla o índice dos arrays e conta os filmes. 
+int qtd_clientes = 0;                                      // Controla o índice dos arrays e conta os clientes. 
+int qtd_estoque = 0;                                       // Controla o índice dos arrays e conta os estoques.
+int qtd_aluguel = 0;                                       // Controla o índice dos arrays e conta os alugueis.
+   
+int estoque = 0;                                           // Usado para guardar a quantidade de filmes estqoue cadastrados
 
 
-#define TAMANHO 100 // Define o tamanho da qtd de filmes para cadastro no estoque
+#define TAMANHO 100                                        // Define o tamanho da qtd de filmes para cadastro no estoque
 
 //-----------------------------------------------------Variáveis Globais-----------------------------------------------------------------//
 
