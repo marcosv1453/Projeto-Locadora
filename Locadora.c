@@ -20,7 +20,7 @@ char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer
 
 //------ Documentação -------//
 
-//-----------------------------------------------------Variáveis Globais------------------------------------------------------------------//
+//-----------------------------------------------------Variáveis Globais-----------------------------------------------------------------//
 
 
 int escolha;      // Variável responsável pelo controle das opções da navegação.
@@ -40,7 +40,7 @@ int estoque = 0;                                                           // Us
 
 #define TAMANHO 100 // Define o tamanho da qtd de filmes para cadastro no estoque
 
-//-----------------------------------------------------Variáveis Globais------------------------------------------------------------------//
+//-----------------------------------------------------Variáveis Globais-----------------------------------------------------------------//
 
 
 // Armazenamento dos dados.
