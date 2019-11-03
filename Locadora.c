@@ -20,7 +20,7 @@ char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer
 
 //------ Documentação -------//
 
-//------ Variável globais -------//
+//-----------------------------------------------------Variáveis Globais------------------------------------------------------------------//
 
 
 int escolha;      // Variável responsável pelo controle das opções da navegação.
@@ -40,10 +40,11 @@ int estoque = 0;                                                           // Us
 
 #define TAMANHO 100 // Define o tamanho da qtd de filmes para cadastro no estoque
 
+//-----------------------------------------------------Variáveis Globais------------------------------------------------------------------//
 
-//----- Variável globais -------//
 
-struct st_filmes{                                   // Struct para armazenar os filmes;                            \
+// Armazenamento dos dados.
+struct st_filmes{                                     // Struct para armazenar os filmes;
 
 
 
@@ -55,7 +56,7 @@ struct st_filmes{                                   // Struct para armazenar os 
     int ano_de_producao;
     char genero[15];
 } filmes[20]; // Inicializando o Struct com um vetor de 20 de tamanho, você só poderá cadastrar 20 filmes
-struct st_clientes{                                // Struct para armazenar os clientes;
+struct st_clientes{                                  // Struct para armazenar os clientes;
 
 
 
@@ -66,7 +67,7 @@ struct st_clientes{                                // Struct para armazenar os c
 
 
 } clientes[20]; // Inciializando o Struct com um vetor de 20 de tamanho, você só poderá cadastrar 20 clientes
-struct st_estoque{                                // Struct para estocar os filmes;
+struct st_estoque{                                  // Struct para estocar os filmes;
 
 
     int identificador_do_filme;
@@ -81,7 +82,7 @@ struct st_estoque{                                // Struct para estocar os film
 
 
 } estoques[TAMANHO]; // Inicializando o Struct com um vetor de 100 de tamanho, você só podera estocar 100 filmes
-typedef struct{                                  // Struct para armazenar os alugueis;
+typedef struct{                                    // Struct para armazenar os alugueis;
 
     int identificador;
     char identificador_do_estoque[40]; // Identifica o filme no estoque pelo nome
@@ -90,7 +91,8 @@ typedef struct{                                  // Struct para armazenar os alu
     char data_da_devolucao[10];
 }st_aluguel;
 
-void f_cadastrar_filme(){                      // Função para cadastrar os filmes
+// Cadastro dos dados.
+void f_cadastrar_filme(){                       // Função para cadastrar os filmes
 
 
 
@@ -140,7 +142,7 @@ void f_cadastrar_filme(){                      // Função para cadastrar os fil
 
 
 }
-void f_cadastrar_cliente(){                   // Função para cadastrar clientes
+void f_cadastrar_cliente(){                    // Função para cadastrar clientes
 
 
 
@@ -247,7 +249,7 @@ void f_cadastrar_cliente(){                   // Função para cadastrar cliente
     menu_cliente();  // Chama a função de menu dos clientes
 
 }
-void f_cadastrar_estoque(){                  // Função para cadastrar filmes no estoque
+void f_cadastrar_estoque(){                   // Função para cadastrar filmes no estoque
 
 
     printf("\n======Cadastro do estoque=======\n\n");
@@ -265,8 +267,7 @@ void f_cadastrar_estoque(){                  // Função para cadastrar filmes n
         for(i = 0 ; i < qtd_filmes ; i++){  // Conta de 0 até a quantidade de filmes já cadastrados no menu de filmes
                // Verificação de identificadores iguais
             if(strcmp(filmes[i].titulo,estoques[qtd_estoque].titulo_estoque) == 0){  // Verifica se o identificador que o usuário cadastrou é igual aos filmes já cadastrados
-
-                booleana = 1; // Caso exista o filme, então ele poderá cadastrar no estoque
+            booleana = 1; // Caso exista o filme, então ele poderá cadastrar no estoque
             }
         }
         if(booleana == 1){
@@ -334,7 +335,7 @@ void f_cadastrar_estoque(){                  // Função para cadastrar filmes n
 
 
 }
-void f_cadastar_aluguel_por_cliente(){      // Função para cadastrar aluguel por cliente
+void f_cadastar_aluguel_por_cliente(){       // Função para cadastrar aluguel por cliente
 
 st_aluguel alugar[TAMANHO]; // Criando um vetor com 100 de tamanho
 
@@ -376,8 +377,8 @@ printf("\n======Cadastro de aluguel de filme por cliente=======\n\n");
 
 }
 
-
-void f_listar_filmes(){                  // Função para listar os filmes
+// Listagem dos dados.
+void f_listar_filmes(){                   // Função para listar os filmes
 
 
 
@@ -414,7 +415,7 @@ void f_listar_filmes(){                  // Função para listar os filmes
 
 
 }
-void f_listar_clientes(){               // Função para listar os clientes
+void f_listar_clientes(){                // Função para listar os clientes
 
 
 
@@ -449,7 +450,7 @@ void f_listar_clientes(){               // Função para listar os clientes
     menu_cliente();  // Chama a função novamente
 
 }
-void f_listar_estoque(){               // Função para listar o estoque
+void f_listar_estoque(){                // Função para listar o estoque
 
 printf("%d\n",estoque);
 printf("%d\n",estoques[0].identificador_do_filme);
@@ -483,7 +484,8 @@ printf("%d",estoques[1].identificador_do_filme);
 
 }
 
-void f_consultar_filmes(){           // Função para consultar os filmes
+// Consulta dos dados.
+void f_consultar_filmes(){            // Função para consultar os filmes
 
 
 
@@ -547,7 +549,7 @@ void f_consultar_filmes(){           // Função para consultar os filmes
 
 
 }
-void f_consultar_clientes(){        // Função para consultar os clientes
+void f_consultar_clientes(){         // Função para consultar os clientes
 
 
 
@@ -621,7 +623,7 @@ void f_consultar_clientes(){        // Função para consultar os clientes
 
 
 }
-void f_consultar_estoque(){        // Função para consultar o estoque
+void f_consultar_estoque(){         // Função para consultar o estoque
 
     printf("\n======Consultar o estoque=======\n\n");
 
@@ -690,7 +692,8 @@ void f_consultar_estoque(){        // Função para consultar o estoque
 
 }
 
-void f_visualizar_filme(){       // Função para visualizar o filme
+// Visualização dos dados.
+void f_visualizar_filme(){        // Função para visualizar o filme
 
 
 
@@ -764,7 +767,7 @@ void f_visualizar_filme(){       // Função para visualizar o filme
     }
 
 }
-void f_visualizar_clientes(){   // Função para visualizar o cliente
+void f_visualizar_clientes(){    // Função para visualizar o cliente
 
 
 
@@ -837,7 +840,7 @@ void f_visualizar_clientes(){   // Função para visualizar o cliente
     }
 
 }
-void f_visualizar_estoque(){   // Função para visualizar item no estoque
+void f_visualizar_estoque(){    // Função para visualizar item no estoque
 
 
 
@@ -906,7 +909,8 @@ void f_visualizar_estoque(){   // Função para visualizar item no estoque
 
 }
 
-void f_editar_filme(){       // Função para editar o filme
+// Edição dos dados.
+void f_editar_filme(){        // Função para editar o filme
 
 
     printf("\n======Editar os filmes=======\n\n");
@@ -1092,7 +1096,7 @@ void f_editar_filme(){       // Função para editar o filme
     }
 
 }
-void f_editar_clientes(){   //Função para editar os clientes
+void f_editar_clientes(){    //Função para editar os clientes
 
 
 
@@ -1346,7 +1350,7 @@ void f_editar_clientes(){   //Função para editar os clientes
     }
 
 }
-void f_editar_estoque(){   // Função para editar o estoque
+void f_editar_estoque(){    // Função para editar o estoque
 
 
 
@@ -1383,6 +1387,15 @@ void f_editar_estoque(){   // Função para editar o estoque
                 printf("Diga-me a nova data de entrada desse filme no estoque (xx/xx/xxxx): ");
                 setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
                 scanf("%s",&estoques[i].data_de_entrada[i]);
+
+                if(strlen(estoques[i].data_de_entrada[i]) != 10 ){  // Verifica se a data de entrega é válida
+
+
+                printf("Data de entrada do estoque inválida (xx/xx/xxxx)\n");
+                system("pause");
+                system("cls");
+                exit(1); // Se a data de entrega for inválida chama a função novamente!
+            }
 
                 printf("Diga-me o gênero do novo filme: ");
                 setbuf(stdin,keyboard);
@@ -1524,6 +1537,7 @@ void f_editar_estoque(){   // Função para editar o estoque
 
 }
 
+// Menus
 void menu_filme(){       // Função do menu do filme
 
 
@@ -1748,6 +1762,7 @@ void menu_aluguel(){  // Função do menu do aluguel
 
 }
 
+// Principal
 int main(){        // Função principal
 
 
