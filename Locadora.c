@@ -6,6 +6,8 @@
 
 char keyboard[BUFSIZ]; // Prótotipo de função para limpeza do buffer
 
+// Program in STACK (LIFO)
+
 //------ Documentação -------//
 
 /**
@@ -279,7 +281,7 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
                 printf("Data de entrada do estoque inválida (xx/xx/xxxx)\n");
                 system("pause");
                 system("cls");
-                f_cadastrar_estoque(); // Se a data de entrega for inválida chama a função novamente!
+                exit(1); // Se a data de entrega for inválida chama a função novamente!
             }
             printf("Filme cadastrado no estoque com sucesso! \n");
 
