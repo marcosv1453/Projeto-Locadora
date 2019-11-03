@@ -73,6 +73,7 @@ struct st_estoque{  // Struct para estocar os filmes;
     int ano_de_producao_estoque;
     char genero_estoque[15];
     int qtd_copias[TAMANHO]; // Guarda a qtd de cópias de um determinado filme que o usuário irá inserir.
+    int soma_copias[TAMANHO]; // Serve para somar as cópias que o usuário inserir
 
 
 
@@ -245,7 +246,7 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
     // Pegando o identificador do filme que ele deseja cadastrar no estoque
     printf("Diga-me o identificador do filme para entrar no estoque: ");
     setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
-    scanf("%d", &estoques[qtd_estoque].identificador_do_filme);
+    scanf("%d", &estoques[0].identificador_do_filme);
 
 
     // Verificação de identificadores iguais
@@ -257,7 +258,7 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
             if(filmes[i].identificador == estoques[qtd_estoque].identificador_do_filme){  // Verifica se o identificador que o usuário cadastrou é igual aos filmes já cadastrados
 
                 booleana = 1; // Caso exista o filme, então ele poderá cadastrar no estoque
-                qtd_estoque = estoques[qtd_estoque].identificador_do_filme; //Atribui a qtd do estoque a partir do identificador do filme
+                qtd_estoque = estoques[0].identificador_do_filme; //Atribui a qtd do estoque a partir do identificador do filme
             }
         }
         if(booleana == 1){
@@ -265,6 +266,8 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
             printf("O filme existe em nosso catálogo, Quantas copias deseja registrar? : ");
             setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
             scanf("%d",&estoques[qtd_estoque].qtd_copias[qtd_estoque]);
+
+            estoques[qtd_estoque].soma_copias[qtd_estoque] += estoques[qtd_estoque].qtd_copias[qtd_estoque]; // Faz o aumento de uma determinada cópias de um filme no estoque
 
             printf("Diga-me a data de entrada desse filme no estoque (xx/xx/xxxx): ");
             setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
@@ -311,7 +314,7 @@ void f_cadastrar_estoque(){  // Função para cadastrar filmes no estoque
 
 
 
-    estoque+=estoques[qtd_estoque].qtd_copias[qtd_estoque]; // Conta quantos filmes no estoque foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
+    estoque += estoques[qtd_estoque].qtd_copias[qtd_estoque]; // Conta quantos filmes no estoque foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
     printf("\nEstoque do filme realizado com sucesso!\n"); // Exibe uma mensagem ao finalizar um cadastro
     system("pause"); // Da uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
@@ -396,15 +399,15 @@ void f_listar_clientes(){   // Função para listar os clientes
 }
 void f_listar_estoque(){  // Função para listar o estoque
 
-
+printf("%d",estoque);
     printf("\n======Listar os filmes no estoque=======\n\n");
 
     printf(" Título                                       Gênero               Ano de produção   Data de entrada Qtd de cópias \n");
     printf("|-------------------------------------------|--------------------|------------------|---------------|-------------|\n");
-    for(i = 0 ; i <= qtd_estoque ; i++){
+    for(i = 0 ; i <= estoque ; i++){
 
 
-        if(estoques[i].identificador_do_filme == -1 ){     // Condição para não mostrar o filme do estoque apagado.
+        if(estoques[i].identificador_do_filme == -1 || estoques[i].ano_de_producao_estoque == 0 ){     // Condição para não mostrar o filme do estoque apagado.
 
             continue; // Se o filme existir na memória, então as linhas de baixo não são executadas.
         }
@@ -413,7 +416,7 @@ void f_listar_estoque(){  // Função para listar o estoque
         printf("\t\t\t\t\t[%s]",estoques[i].genero_estoque);
         printf("\t\t[%d]",estoques[i].ano_de_producao_estoque);
         printf("\t\t[%s]",estoques[i].data_de_entrada[i]);
-        printf("\t[%d]\n",estoques[i].qtd_copias[i]);
+        printf("\t[%d]\n",estoques[i].soma_copias[i]);
     printf("|-------------------------------------------|--------------------|------------------|---------------|-------------|");
         printf("\n");
 
@@ -564,10 +567,7 @@ void f_consultar_clientes(){   // Função para consultar os clientes
 
 
 }
-
 void f_consultar_estoque(){  // Função para consultar o estoque
-
-
 
     printf("\n======Consultar o estoque=======\n\n");
 
@@ -576,13 +576,13 @@ void f_consultar_estoque(){  // Função para consultar o estoque
 
     printf("\n");
 
-    for(i = 0 ; i <= qtd_estoque ; i++){
+    for(i = 0 ; i <= estoque ; i++){
 
 
 
 
 
-        if(estoques[i].identificador_do_filme == -1 ){}  // Condição para não mostrar o filme do estoqueapagado.
+        if(estoques[i].identificador_do_filme == -1 || estoques[i].ano_de_producao_estoque == 0 ){}  // Condição para não mostrar o filme do estoqueapagado.
 
         if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0){
 
@@ -796,7 +796,7 @@ void f_visualizar_estoque(){  // Função para visualizar item no estoque
 
     printf("\n");
 
-    for(i = 0 ; i <= qtd_estoque ; i++){
+    for(i = 0 ; i <= estoque ; i++){
 
 
         if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0 && strcmp(estoque_consulta,"") != 0){
@@ -808,7 +808,7 @@ void f_visualizar_estoque(){  // Função para visualizar item no estoque
             printf("Gênero: [%s]\n",estoques[i].genero_estoque);
             printf("Ano de produção: [%d]\n",estoques[i].ano_de_producao_estoque);
             printf("Data de entrada: [%s]\n",estoques[i].data_de_entrada[i]);
-            printf("Quantidade de cópias: [%d]\n",estoques[i].qtd_copias[i]);
+            printf("Quantidade de cópias: [%d]\n",estoques[i].soma_copias[i]);
             printf("\n\n");
             break;
 
@@ -1310,7 +1310,7 @@ void f_editar_estoque(){  // Função para editar o estoque
         scanf("%d",&consulta);  // Armazena o filme que o usuário digitou
         printf("\n");
 
-        for(i = 0 ; i <= qtd_estoque ; i++){
+        for(i = 0 ; i <= estoque ; i++){
 
 
 
@@ -1326,20 +1326,9 @@ void f_editar_estoque(){  // Função para editar o estoque
                 setbuf(stdin,keyboard);
                 scanf("%39[^\n]s",estoques[i].titulo_estoque);
 
-                printf("Diga-me o ano de produção do novo filme do estoque: ");
-                setbuf(stdin,keyboard);
-                scanf("%d",&estoques[i].ano_de_producao_estoque);
-
-                if(estoques[i].ano_de_producao_estoque > 2019 || estoques[i].ano_de_producao_estoque < 1895){       // Faz com que o usuário não digite um ano de produção que não exista.
-
-
-
-
-                    printf("\nAno de produção inválido! \n\n");
-                    system("pause");
-                    system("cls");
-                    exit(1); // Se o ano de produção for inválido o programa é fechado!
-                }
+                printf("Diga-me a nova data de entrada desse filme no estoque (xx/xx/xxxx): ");
+                setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
+                scanf("%s",&estoques[i].data_de_entrada[i]);
 
                 printf("Diga-me o gênero do novo filme: ");
                 setbuf(stdin,keyboard);
@@ -1400,7 +1389,7 @@ void f_editar_estoque(){  // Função para editar o estoque
         printf("Diga-me o identificador do filme a ser excluído: ");
         scanf("%d",&consulta); // Armazena o filme que o usuário digitou
 
-        for(i = 0 ; i <= qtd_estoque ; i++){
+        for(i = 0 ; i <= estoque ; i++){
 
 
 
