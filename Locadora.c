@@ -254,23 +254,19 @@ void f_cadastrar_estoque(){                  // Função para cadastrar filmes n
 
     int booleana = 0; // Servirá para o controle do for da verificação de identificadores cadastrados (0 false) - (1 - True)
 
-
-
     if(estoque < TAMANHO){   // O usuário só pode cadastrar 100 filmes no estoque, a verificação só ocorrerrá se o usuário ainda não tiver preenchido 20 filmes
 
-    // Pegando o identificador do filme que ele deseja cadastrar no estoque
-    printf("Diga-me o identificador do filme para entrar no estoque: ");
+    // Pegando o nome do filme que ele deseja cadastrar no estoque
+    printf("Diga-me o nome do filme para entrar no estoque: ");
     setbuf(stdin,keyboard);                      // Tirando o lixo da entrada
-    scanf("%d", &estoques[0].identificador_do_filme);
+    scanf("%39[^\n]s",&estoques[qtd_estoque].titulo_estoque);
 
 
         for(i = 0 ; i < qtd_filmes ; i++){  // Conta de 0 até a quantidade de filmes já cadastrados no menu de filmes
                // Verificação de identificadores iguais
-            if(filmes[i].identificador == estoques[qtd_estoque].identificador_do_filme){  // Verifica se o identificador que o usuário cadastrou é igual aos filmes já cadastrados
+            if(strcmp(filmes[i].titulo,estoques[qtd_estoque].titulo_estoque) == 0){  // Verifica se o identificador que o usuário cadastrou é igual aos filmes já cadastrados
 
                 booleana = 1; // Caso exista o filme, então ele poderá cadastrar no estoque
-                qtd_estoque = estoques[0].identificador_do_filme; //Atribui a qtd do estoque a partir do identificador do filme
-
             }
         }
         if(booleana == 1){
@@ -324,10 +320,11 @@ void f_cadastrar_estoque(){                  // Função para cadastrar filmes n
             estoques[qtd_estoque].ano_de_producao_estoque = filmes[qtd_estoque].ano_de_producao;
 
 
-
+    estoques[qtd_estoque].identificador_do_filme = qtd_estoque; //Atribui o identificador do filme a partir do estoque
 
 
     estoque += estoques[qtd_estoque].qtd_copias[qtd_estoque]; // Conta quantos filmes no estoque foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
+    ++qtd_estoque; // Adicionado 1 a qtd de estoque sempre quando a função é finaliza com sucesso
     printf("\nEstoque do filme realizado com sucesso!\n"); // Exibe uma mensagem ao finalizar um cadastro
     system("pause"); // Da uma pausa antes de executar a próxima linha de comando
     system("cls");   // Limpa o console
@@ -464,7 +461,7 @@ printf("%d",estoques[1].identificador_do_filme);
     for(i = 0 ; i <= estoque ; i++){
 
 
-        if(estoques[i].identificador_do_filme == -1 || estoques[i].ano_de_producao_estoque == 0 ){     // Condição para não mostrar o filme do estoque apagado.
+        if(strlen(estoques[i].titulo_estoque) == 0 || estoques[i].ano_de_producao_estoque == 0 ){     // Condição para não mostrar o filme do estoque apagado.
 
             continue; // Se o filme existir na memória, então as linhas de baixo não são executadas.
         }
@@ -473,8 +470,7 @@ printf("%d",estoques[1].identificador_do_filme);
         printf("\t\t\t\t\t[%s]",estoques[i].genero_estoque);
         printf("\t\t[%d]",estoques[i].ano_de_producao_estoque);
         printf("\t\t[%s]",estoques[i].data_de_entrada[i]);
-        printf("\t[%d]\n",estoques[i].soma_copias[i]);
-        printf("%d\n",estoques[i].identificador_do_filme);
+        printf("\t[%d]\n",estoques[i].qtd_copias[i]);
     printf("|-------------------------------------------|--------------------|------------------|---------------|-------------|");
         printf("\n");
 
@@ -640,7 +636,7 @@ void f_consultar_estoque(){        // Função para consultar o estoque
 
 
 
-        if(estoques[i].identificador_do_filme == -1 || estoques[i].ano_de_producao_estoque == 0 ){}  // Condição para não mostrar o filme do estoqueapagado.
+        if(strlen(estoques[i].titulo_estoque) == 0 || estoques[i].ano_de_producao_estoque == 0 ){}  // Condição para não mostrar o filme do estoque apagado.
 
         if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0){
 
@@ -1364,8 +1360,8 @@ void f_editar_estoque(){   // Função para editar o estoque
     if(escolha == 1){   // Se o número digitado for 1 então irá atualizar o filme no estoque
 
 
-        printf("\nDiga-me o identificador do filme a ser atualizado: ");
-        scanf("%d",&consulta);  // Armazena o filme que o usuário digitou
+        printf("\nDiga-me o nome do filme a ser atualizado: ");
+        scanf("%s",&estoque_consulta);  // Armazena o filme que o usuário digitou
         printf("\n");
 
         for(i = 0 ; i <= estoque ; i++){
@@ -1374,7 +1370,7 @@ void f_editar_estoque(){   // Função para editar o estoque
 
 
 
-            if(consulta == estoques[i].identificador_do_filme){
+            if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0){
 
 
 
@@ -1394,7 +1390,7 @@ void f_editar_estoque(){   // Função para editar o estoque
                 printf("\nFilme atualizado com sucesso! \n");
                 break;
             }
-            else if(consulta != estoques[i].identificador_do_filme && i == qtd_estoque ){   // Só executará a ação quando o laço for terminar
+            else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0 && i == qtd_estoque ){   // Só executará a ação quando o laço for terminar
 
 
 
@@ -1444,8 +1440,8 @@ void f_editar_estoque(){   // Função para editar o estoque
 
 
 
-        printf("Diga-me o identificador do filme a ser excluído: ");
-        scanf("%d",&consulta); // Armazena o filme que o usuário digitou
+        printf("Diga-me o nome do filme a ser excluído: ");
+        scanf("%s",&estoque_consulta); // Armazena o filme que o usuário digitou
 
         for(i = 0 ; i <= estoque ; i++){
 
@@ -1453,18 +1449,19 @@ void f_editar_estoque(){   // Função para editar o estoque
 
 
 
-            if(consulta == estoques[i].identificador_do_filme){                   // "Apagando" Os filmes da Random Acess Memory
+            if(strcmp(estoque_consulta,estoques[i].titulo_estoque)== 0){                   // "Apagando" Os filmes da Random Acess Memory
 
 
 
                 // Faz com que o identificador fique nulo, assim parecendo que foi apagado da memória e não mostrrando nos menus.
-                estoques[i].identificador_do_filme = -1;
-                estoque-= estoques[i].qtd_copias[i];// Remove um filme do estoque
+                strcpy(estoques[i].titulo_estoque,"");
+                estoque-= estoques[i].qtd_copias[i];// Remove as cópias do item do estoque
+                qtd_estoque--; // Remove um item do estoque
                 printf("Filme excluído com sucesso! \n");
                 break;
             }
 
-            else if(consulta != estoques[i].identificador_do_filme && i == qtd_filmes ){  // Só executa a ação quando o laço for terminar
+            else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0 && i == qtd_filmes ){  // Só executa a ação quando o laço for terminar
 
 
 
