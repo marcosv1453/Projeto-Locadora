@@ -33,6 +33,7 @@ char estoque_consulta[40];                                 // Armazena e compara
 char *guardar;                                             // Variável que armazena o que existe depois do @ dentro de uma string
 char validar_email[2][30] = {"@gmail.com","@hotmail.com"}; // Variável criada para validar email do usuário.
 
+FILE *arq;                                                 // Criando um ponteiro para manipular arquivos
 
 int qtd_filmes = 0;                                        // Controla o índice dos arrays e conta os filmes.
 int qtd_clientes = 0;                                      // Controla o índice dos arrays e conta os clientes.
@@ -149,6 +150,34 @@ void f_cadastrar_filme(){                         // Função para cadastrar os 
     scanf("%14[^\n]s",&filmes[i].genero);
 
     filmes[qtd_filmes].identificador = qtd_filmes; // Primeiro identificador é igual a 0
+
+
+    //Fazendo o banco de dados
+               arq = fopen("Banco de dados filmes.txt","a");
+
+    if(arq){    // Se o arquivo existir então irá documentar até 20 filmes descritos pelo usuário.
+                if(qtd_filmes < 20){
+
+                fprintf(arq,"\n\nIdentificador do filme %d: ",qtd_filmes); //Identificador
+                fprintf(arq,"[%d]\n",filmes[qtd_filmes].identificador);
+
+                fprintf(arq,"Título do filme %d: ",qtd_filmes);            // Título
+                fprintf(arq,"[%s]\n",filmes[qtd_filmes].titulo);
+
+                fprintf(arq,"Ano de produção do filme %d: ",qtd_filmes);   // Ano de produção
+                fprintf(arq,"[%d]\n",filmes[qtd_filmes].ano_de_producao);
+
+                fprintf(arq,"Gênero do filme %d: ",qtd_filmes);            // Gênero
+                fprintf(arq,"[%s]\n",filmes[qtd_filmes].genero);
+
+                }
+    }else{
+        printf("Erro na abertura do arquivo \n");
+    }
+    fclose(arq); //Fechando o arquivo após a manipulação
+
+
+
 
     printf("\n\n");
     ++qtd_filmes; // Após o usuário cadastrar o filme essa variável é incrementada, fazendo que conte quantos filmes foram cadastrados.
@@ -344,6 +373,36 @@ void f_cadastrar_estoque(){                     // Função para cadastrar filme
             strcpy(estoques[qtd_estoque].titulo_estoque,filmes[qtd_estoque].titulo);
             strcpy(estoques[qtd_estoque].genero_estoque,filmes[qtd_estoque].genero);
             estoques[qtd_estoque].ano_de_producao_estoque = filmes[qtd_estoque].ano_de_producao;
+
+
+            //Fazendo o banco de dados
+                arq = fopen("Banco de dados estoque.txt","a");
+
+    if(arq){    // Se o arquivo existir então irá documentar até 100 filmes do estoque descritos pelo usuário
+                if(estoque < TAMANHO){
+
+                fprintf(arq,"\n\nTítulo do filme no estoque %d: ",qtd_estoque);        //Título
+                fprintf(arq,"[%s]\n",estoques[qtd_estoque].titulo_estoque);
+
+                fprintf(arq,"Gênero do filme no estoque %d: ",qtd_estoque);            // Gênero
+                fprintf(arq,"[%s]\n",estoques[qtd_estoque].genero_estoque);
+
+                fprintf(arq,"Ano de produção do filme no estoque %d: ",qtd_estoque);   // Ano de produção
+                fprintf(arq,"[%d]\n",estoques[qtd_estoque].ano_de_producao_estoque);
+
+                fprintf(arq,"Data de entrada do filme no estoque %d: ",qtd_estoque);   // Data de entrada
+                fprintf(arq,"[%s]\n",estoques[qtd_estoque].data_de_entrada[qtd_estoque]);
+
+                fprintf(arq,"Cópias do filme no estoque %d: ",qtd_estoque);            // Cópias
+                fprintf(arq,"[%d]\n",estoques[qtd_estoque].soma_copias[qtd_estoque]);
+
+                }
+    }else{
+        printf("Erro na abertura do arquivo \n");
+    }
+    fclose(arq); //Fechando o arquivo após a manipulação
+
+
 
 
     estoque += estoques[qtd_estoque].qtd_copias[qtd_estoque]; // Conta quantos filmes no estoque foram cadastrados é a partir disso vê se o limite de filmes cadastrados passou da meta, ou não.
@@ -965,7 +1024,7 @@ void f_consultar_aluguel_por_cliente(){ // Função para consultar o aluguel por
 
 
 }
-void f_consultar_aluguel(){
+void f_consultar_aluguel(){           // Função para consultar o aluguel
 
   printf("\n======Consultar o aluguel dos filmes=======\n\n");
 
@@ -2115,16 +2174,15 @@ void menu_aluguel(){ // Função do menu do aluguel
 int main(){       // Função principal
 
 
-
-
     setlocale(LC_ALL,"Portuguese"); // Permite acentos e outras regras da língua portuguesa em strings.
 
     printf("O que você deseja fazer? \n");
     printf("[1] - Entrar no menu da locadora \n");
-    printf("[2] - Entrar no menu do cliente \n");
-    printf("[3] - Entrar no menu do estoque \n");
-    printf("[4] - Entrar no menu do aluguel \n");
-    printf("[5] - Sair \n");
+    printf("[2] - Entrar no menu do cliente  \n");
+    printf("[3] - Entrar no menu do estoque  \n");
+    printf("[4] - Entrar no menu do aluguel  \n");
+    printf("[5] - Apagar registros no banco  \n");
+    printf("[6] - Sair \n");
     printf("Escolha a opção: ");
     scanf("%d",&escolha);
 
@@ -2149,6 +2207,15 @@ int main(){       // Função principal
         system("cls");
         menu_aluguel();
     case 5:
+    fopen("Banco de dados filmes.txt","w");    // Apagando conteúdo do banco
+    fopen("Banco de dados estoque.txt","w");  // Apagando o conteúdo do banco
+    fclose(arq);                             // Fecha o aqquivo
+    printf("\n\n\nRegistros apagados!\n\n\n");
+    system("pause");
+    system("cls");
+    main();                                // Retorna a main
+        break;
+    case 6:
         break;
     default:
         printf("Opção não reconhecida... \n");
