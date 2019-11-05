@@ -1,190 +1,190 @@
-<! -
-*** Obrigado por verificar este modelo README. Se você tem uma sugestão que
-*** faça isso melhor, garfo o repositório e crie uma solicitação de recebimento ou simplesmente abra
-*** um problema com a tag "aprimoramento".
-*** Obrigado novamente! Agora vá criar algo INCRÍVEL! : D
+<!--
+*** Thanks for checking out this README Template. If you have a suggestion that would
+*** make this better, please fork the repo and create a pull request or simply open
+*** an issue with the tag "enhancement".
+*** Thanks again! Now go create something AMAZING! :D
 ***
 ***
 ***
-*** Para evitar redigitar muita informação. Faça uma pesquisa e substitua pelo seguinte:
-*** github_username, repositório, twitter_handle, email
-->
+*** To avoid retyping too much info. Do a search and replace for the following:
+*** github_username, repo, twitter_handle, email
+-->
 
 
 
 
 
-<! - ESCUDOS DE PROJETO ->
-<! -
-*** Estou usando links de "estilo de referência" de marcação para facilitar a leitura.
-*** Os links de referência estão entre colchetes [] em vez de parênteses ().
-*** Consulte a parte inferior deste documento para a declaração das variáveis ​​de referência
-*** para contributors-url, forks-url, etc. Essa é uma sintaxe concisa e opcional que você pode usar.
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
-->
-[! [Contribuintes] [contribuidor-escudo]] [contribuidor-url]
-[! [Forks] [forks-shield]] [forks-url]
-[! [Stargazers] [stars-shield]] [stars-url]
-[! [Issues] [issues-shield]] [Issues-url]
-[! [MIT License] [license-shield]] [license-url]
-[! [LinkedIn] [linkedin-shield]] [linkedin-url]
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
-<! - LOGOTIPO DO PROJETO ->
+<!-- PROJECT LOGO -->
 <br />
-<p align = "center">
+<p align="center">
   <a href="https://github.com/github_username/repo">
-    <img src = "images / logo.png" alt = "Logotipo" width = "80" height = "80">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align = "center"> YOUR_TITLE </h3>
+  <h3 align="center">YOUR_TITLE</h3>
 
-  <p align = "center">
+  <p align="center">
     YOUR_SHORT_DESCRIPTION
     <br />
-    <a href="https://github.com/github_username/repo"> <strong> Explore os documentos »</strong> </a>
+    <a href="https://github.com/github_username/repo"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo"> Ver demonstração </a>
+    <a href="https://github.com/github_username/repo">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo/issues"> Relatar bug </a>
+    <a href="https://github.com/github_username/repo/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo/issues"> Solicitar recurso </a>
+    <a href="https://github.com/github_username/repo/issues">Request Feature</a>
   </p>
 </p>
 
 
 
-<! - ÍNDICE ->
-## Índice
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-* [Sobre o projeto] (# sobre o projeto)
-  * [Construído com] (# embutido)
-* [Primeiros passos] (# primeiros passos)
-  * [Pré-requisitos] (# pré-requisitos)
-  * [Instalação] (# instalação)
-* [Uso] (# uso)
-* [Roteiro] (# roteiro)
-* [Contribuindo] (# contribuindo)
-* [Licença] (# licença)
-* [Contato] (# contato)
-* [Agradecimentos] (# agradecimentos)
-
-
-
-<! - SOBRE O PROJETO ->
-## Sobre o projeto
-
-[! [Captura de tela do nome do produto] [captura de tela do produto]] (https://example.com)
-
-Aqui está um modelo em branco para começar:
-** Para evitar redigitar muita informação. Faça uma pesquisa e substitua pelo seu editor de texto pelo seguinte: **
-`github_username`,` repo`, `twitter_handle`,` email`
-
-
-### Construído com
-
-* [] ()
-* [] ()
-* [] ()
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
 
 
 
-<! - INTRODUÇÃO ->
-## Começando
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-Para obter uma cópia local em execução, siga estas etapas simples.
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-### Pré-requisitos
+Here's a blank template to get started:
+**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
+`github_username`, `repo`, `twitter_handle`, `email`
 
-Este é um exemplo de como listar as coisas necessárias para usar o software e como instalá-las.
+
+### Built With
+
+* []()
+* []()
+* []()
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
 * npm
-`` sh
-npm instala o npm @ latest -g
-`` ``
+```sh
+npm install npm@latest -g
+```
 
-### Instalação
+### Installation
  
-1. Clone o repositório
-`` sh
+1. Clone the repo
+```sh
 git clone https://github.com/github_username/repo.git
-`` ``
-2. Instale pacotes NPM
-`` sh
-instalação npm
-`` ``
+```
+2. Install NPM packages
+```sh
+npm install
+```
 
 
 
-<! - EXEMPLOS DE USO ->
-## Uso
+<!-- USAGE EXAMPLES -->
+## Usage
 
-Use esse espaço para mostrar exemplos úteis de como um projeto pode ser usado. Capturas de tela adicionais, exemplos de código e demos funcionam bem neste espaço. Você também pode conectar-se a mais recursos.
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_Para obter mais exemplos, consulte a [Documentação] (https://example.com) _
-
-
-
-<! - ROADMAP ->
-## Roteiro
-
-Consulte os [problemas em aberto] (https://github.com/github_username/repo/issues) para obter uma lista dos recursos propostos (e problemas conhecidos).
+_For more examples, please refer to the [Documentation](https://example.com)_
 
 
 
-<! - CONTRIBUIÇÃO ->
-## Contribuindo
+<!-- ROADMAP -->
+## Roadmap
 
-Contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Todas as contribuições que você fizer são ** muito apreciadas **.
-
-1. Bifurque o projeto
-2. Crie sua filial de recursos (`git checkout -b feature / AmazingFeature`)
-3. Confirme suas alterações (`git commit -m 'Adicione algumas AmazingFeature' ')
-4. Pressione para a ramificação (`git push origin feature / AmazingFeature`)
-5. Abra uma solicitação pull
+See the [open issues](https://github.com/github_username/repo/issues) for a list of proposed features (and known issues).
 
 
 
-<! - LICENÇA ->
-## Licença
+<!-- CONTRIBUTING -->
+## Contributing
 
-Distribuído sob a licença MIT. Veja `LICENÇA 'para mais informações.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-
-
-<! - CONTATO ->
-## Contato
-
-Seu nome - [@twitter_handle] (https://twitter.com/twitter_handle) - e-mail
-
-Link do projeto: [https://github.com/github_username/repo}(https://github.com/github_username/repo)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 
 
-<! - AGRADECIMENTOS ->
-## Reconhecimentos
+<!-- LICENSE -->
+## License
 
-* [] ()
-* [] ()
-* [] ()
+Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+
+Project Link: [https://github.com/github_username/repo](https://github.com/github_username/repo)
 
 
-<! - LINKS E IMAGENS DE MARKDOWN ->
-<! - https://www.markdownguide.org/basic-syntax/#reference-style-links ->
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+
+* []()
+* []()
+* []()
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[URL dos colaboradores]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
 [forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
 [stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[questões-escudo]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
 [issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[escudo de licença]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[URL da licença]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[captura de tela do produto]: images / screenshot.png
+[product-screenshot]: images/screenshot.png
