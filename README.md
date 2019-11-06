@@ -116,7 +116,7 @@ Link do projeto : [https://github.com/Duduxs/Projeto-Locadora](https://github.co
 <!-- MARKDOWN LINKS & IMAGES -->
 [forks-shield]: https://img.shields.io/badge/forks-0-blue
 [forks-url]: https://github.com/Duduxs/Projeto-Locadora/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
+[stars-shield]: https://img.shields.io/badge/stars-0-blue
 [stars-url]: https://github.com/Duduxs/Projeto-Locadora/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
 [issues-url]: https://github.com/Duduxs/Projeto-Locadora/issues
