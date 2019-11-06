@@ -17,7 +17,7 @@
   <p align="center">
     Uma locadora virtual desenvolvida em C
     <br />
-    <a href="https://github.com/Duduxs/Programacao/tree/master/Programas%20em%20C"><strong>Veja outros programas »</strong></a>
+    <a href="https://github.com/Duduxs/Programacao"><strong>Veja outros programas »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Duduxs/Projeto-Locadora/issues">Reporte um Bug</a>
