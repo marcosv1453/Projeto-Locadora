@@ -28,14 +28,14 @@
 ## Table of Contents
 
 * [Sobre o projeto](#sobre-o-projeto)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+  * [Feito com](#feito-com)
+* [Começando](#Começando)
+  * [Pré-requisitos](#pré-requisites)
+  * [Instalação](#instalação)
+* [Contribuição](#contribuição)
+* [Licença](#licença)
+* [Contato](#contato)
+* [Reconhecimentos](#reconhecimentos)
 
 <!-- ABOUT THE PROJECT -->
 ## Sobre o projeto
@@ -53,25 +53,25 @@
 
 * Conclusão:       Uma vez que tive que fazer tudo sozinho não foi fácil. Quando eu criava algo dentro do programa eu sempre tinha que                      testar e isso demorava bastante tempo. Acarretou que passei noites em claro sempre pensando na melhor forma de                          resolver aquele bug que tinha aparecido no software, entretanto foi uma experiência incrível, nunca havia usado o C                      para programar antes e acabei descobrindo várias funcionalidades legais ao desenrolar do projeto, sobretudo a                            experiência na linguaguem. 
 
-### Built With
+### Feito com
 
 * [Codeblocks IDE](http://www.codeblocks.org/)
 * [C](http://linguagemc.com.br/o-que-e-linguagem-c/)
 * [GIT](https://git-scm.com/)
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Começando
 
 Por ser tratar de um projeto simples, você não irá precisar de muita coisa. É recomendável que você use a versão mais recente da sua IDE para rodar o programa sem quaisquer problemas.
 
-### Prerequisites
+### Pré-requisitos
 
 Alguns comandos e bibliotecas infelizmente só funcionam corretamente no windows.  
 
 * Windows
 * IDE para C
 
-### Installation
+### Instalação
 
 1. Clone o repositório
 ```sh
@@ -82,7 +82,7 @@ git clone https://github.com/Duduxs/Projeto-Locadora.git
 3. Cole em sua IDE e execute
 
 <!-- CONTRIBUTING -->
-## Contributing
+## Contribuição
 
 Contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Todas as contribuições que você fizer para esse projeto irei ficar **muito grato**.
 
@@ -93,19 +93,19 @@ Contribuições são o que tornam a comunidade de código aberto um lugar incrí
 5. Abra uma Pull Request
 
 <!-- LICENSE -->
-## License
+## Licença
 
 Distribuído pela MIT License. Consulte o arquivo `LICENSE.txt` para mais informações.
 
 <!-- CONTACT -->
-## Contact
+## Contato
 
 Eduardo José - [duduxss3@gmail.com]
 
 Link do projeto : [https://github.com/Duduxs/Projeto-Locadora](https://github.com/Duduxs/Projeto-Locadora)
 
 <!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+## Reconhecimentos
 * [Imagens Shields](https://shields.io)
 * [Licença](http://escolhaumalicenca.com.br/)
 * [Agradecimento pela Template](https://github.com/othneildrew)
