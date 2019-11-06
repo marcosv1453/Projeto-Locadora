@@ -106,7 +106,7 @@ Link do projeto : [https://github.com/Duduxs/Projeto-Locadora](https://github.co
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Reconhecimentos
-* [Imagens Shields](https://shields.io)
+* [Shields](https://shields.io)
 * [Licença](http://escolhaumalicenca.com.br/)
 * [Agradecimento pela Template](https://github.com/othneildrew)
 * [Logo](https://www.canva.com)
