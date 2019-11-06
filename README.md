@@ -25,7 +25,7 @@
 </p>
 
 <!-- TABLE OF CONTENTS -->
-## Table of Contents
+## índice
 
 * [Sobre o projeto](#sobre-o-projeto)
   * [Feito com](#feito-com)
@@ -49,7 +49,7 @@
                    empresários deseja-se oferecer um programa para gerenciamento de funções básicas de
                    uma locadora. Através do programa será possível cadastrar filmes e clientes.
 
-* Desenvolvimento: Através da proposta, criei uma locadora virtual. E também através de ponteiros e arquivos simulei um pequeno banco de                    dados para a entrada de filmes e/ou estoques. Utilizei o GIT para versionamento do código, assim tendo o maior                          controle possível sobre o projeto, o mesmo foi desenvolvido na IDE do CodeBlocks. Ao fazer o programa destaquei 4                        funções principais, a primeira função para cadastrar um filme na parte lógica da locadora, a segunda para cadastro de                    cliente, a terceira para cadastrar o filme na parte física da locadora (Estoque) e por último um menu para alugar os                    filmes. O programa foi desenvolvido com base na estrutura de dados *STACK (LIFO)*.       
+* Desenvolvimento: Através da proposta, criei uma locadora virtual utilizando a linguaguem C e a IDE Codeblocks::. E também através de                      ponteiros e arquivos simulei um pequeno banco de dados para a entrada de filmes e/ou estoques. Utilizei o GIT para                      versionamento do código, assim tendo o maior controle possível sobre o projeto. Ao fazer o programa destaquei 4                          funções principais, a primeira função para cadastrar um filme na parte lógica da locadora, a segunda para cadastro de                    cliente, a terceira para cadastrar o filme na parte física da locadora (Estoque) e por último um menu para alugar os                    filmes. O programa foi desenvolvido com base na estrutura de dados *STACK (LIFO)*.       
 
 * Conclusão:       Uma vez que tive que fazer tudo sozinho não foi fácil. Quando eu criava algo dentro do programa eu sempre tinha que                      testar e isso demorava bastante tempo. Acarretou que passei noites em claro sempre pensando na melhor forma de                          resolver aquele bug que tinha aparecido no software, entretanto foi uma experiência incrível, nunca havia usado o C                      para programar antes e acabei descobrindo várias funcionalidades legais ao desenrolar do projeto, sobretudo a                            experiência na linguaguem. 
 
