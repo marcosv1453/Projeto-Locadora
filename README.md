@@ -25,7 +25,7 @@
 </p>
 
 <!-- TABLE OF CONTENTS -->
-## índice
+## Índice
 
 * [Sobre o projeto](#sobre-o-projeto)
   * [Feito com](#feito-com)
