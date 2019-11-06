@@ -27,7 +27,7 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [Sobre o projeto](#about-the-project)
+* [Sobre o projeto](#sobre-o-projeto)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
