@@ -1,4 +1,7 @@
 <!-- PROJECT SHIELDS -->
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
@@ -59,7 +62,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Por ser tratar de um projeto simples, você não irá precisar de muita coisa. É recomendável que você usa a versão mais recente da sua IDE para rodar o programa sem quaisquer problemas.
+Por ser tratar de um projeto simples, você não irá precisar de muita coisa. É recomendável que você use a versão mais recente da sua IDE para rodar o programa sem quaisquer problemas.
 
 ### Prerequisites
 
@@ -81,7 +84,7 @@ git clone https://github.com/Duduxs/Projeto-Locadora.git
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Todas as contribuições que você fizerem para esse projeto ficarei **muito grato**.
+Contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Todas as contribuições que você fizer para esse projeto irei ficar **muito grato**.
 
 1. Fork o Projeto
 2. Crie uma Feature Branch 
@@ -105,13 +108,18 @@ Link do projeto : [https://github.com/Duduxs/Projeto-Locadora](https://github.co
 ## Acknowledgements
 * [Imagens Shields](https://shields.io)
 * [Licença](http://escolhaumalicenca.com.br/)
-* [Agradecimento GitHub](https://github.com/othneildrew)
+* [Agradecimento Template](https://github.com/othneildrew)
 * [Logo](https://www.canva.com)
 * [Agradecimento pela proposta do projeto](https://www.linkedin.com/in/brunom4ciel)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
+[forks-url]: https://github.com/Duduxs/Projeto-Locadora/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
+[stars-url]: https://github.com/Duduxs/Projeto-Locadora/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
+[issues-url]: https://github.com/Duduxs/Projeto-Locadora/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
 [license-url]: https://github.com/Duduxs/Projeto-Locadora/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
