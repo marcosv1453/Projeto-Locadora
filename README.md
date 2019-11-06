@@ -30,7 +30,7 @@
 * [Sobre o projeto](#sobre-o-projeto)
   * [Feito com](#feito-com)
 * [Começando](#Começando)
-  * [Pré-requisitos](#pré-requisites)
+  * [Pré-requisitos](#pré-requisitos)
   * [Instalação](#instalação)
 * [Contribuição](#contribuição)
 * [Licença](#licença)
