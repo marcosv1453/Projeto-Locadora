@@ -9,7 +9,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Duduxs/Projeto-Locadora">
-    <img src="img/Logo.png" alt="Logo" width="500" height="500">
+    <img src="img/Logo.png" alt="Logo" width="977" height="528">
   </a>
 
   <h3 align="center">Locadora</h3>
