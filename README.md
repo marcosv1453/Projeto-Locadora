@@ -38,7 +38,7 @@
 * [Acknowledgements](#acknowledgements)
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Sobre o projeto
 
 [![Tela da Locadora][product-screenshot]](https://github.com/Duduxs/Projeto-Locadora/blob/master/img/animacao.gif)
 
