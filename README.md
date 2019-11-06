@@ -17,7 +17,7 @@
   <p align="center">
     Uma locadora virtual desenvolvida em C
     <br />
-    <a href="https://github.com/Duduxs/Programacao/tree/master/Programas%20em%20C"><strong>Veja outros programas »</strong></a>
+    <a href="https://github.com/Duduxs/Programacao"><strong>Veja outros programas »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Duduxs/Projeto-Locadora/issues">Reporte um Bug</a>
@@ -25,20 +25,20 @@
 </p>
 
 <!-- TABLE OF CONTENTS -->
-## Table of Contents
+## Índice
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+* [Sobre o projeto](#sobre-o-projeto)
+  * [Feito com](#feito-com)
+* [Começando](#Começando)
+  * [Pré-requisitos](#pré-requisitos)
+  * [Instalação](#instalação)
+* [Contribuição](#contribuição)
+* [Licença](#licença)
+* [Contato](#contato)
+* [Reconhecimentos](#reconhecimentos)
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Sobre o projeto
 
 [![Tela da Locadora][product-screenshot]](https://github.com/Duduxs/Projeto-Locadora/blob/master/img/animacao.gif)
 
@@ -49,29 +49,29 @@
                    empresários deseja-se oferecer um programa para gerenciamento de funções básicas de
                    uma locadora. Através do programa será possível cadastrar filmes e clientes.
 
-* Desenvolvimento: Através da proposta, criei uma locadora virtual. E também através de ponteiros e arquivos simulei um pequeno banco de                    dados para a entrada de filmes e/ou estoques. Utilizei o GIT para versionamento do código, assim tendo o maior                          controle possível sobre o projeto, o mesmo foi desenvolvido na IDE do CodeBlocks. Ao fazer o programa destaquei 4                        funções principais, a primeira função para cadastrar um filme na parte lógica da locadora, a segunda para cadastro de                    cliente, a terceira para cadastrar o filme na parte física da locadora (Estoque) e por último um menu para alugar os                    filmes. O programa foi desenvolvido com base na estrutura de dados *STACK (LIFO)*.       
+* Desenvolvimento: Através da proposta, criei uma locadora virtual utilizando a linguaguem C e a IDE Codeblocks::. E também através de                      ponteiros e arquivos simulei um pequeno banco de dados para a entrada de filmes e/ou estoques. Utilizei o GIT para                      versionamento do código, assim tendo o maior controle possível sobre o projeto. Ao fazer o programa destaquei 4                          funções principais, a primeira função para cadastrar um filme na parte lógica da locadora, a segunda para cadastro de                    cliente, a terceira para cadastrar o filme na parte física da locadora (Estoque) e por último um menu para alugar os                    filmes. O programa foi desenvolvido com base na estrutura de dados *STACK (LIFO)*.       
 
 * Conclusão:       Uma vez que tive que fazer tudo sozinho não foi fácil. Quando eu criava algo dentro do programa eu sempre tinha que                      testar e isso demorava bastante tempo. Acarretou que passei noites em claro sempre pensando na melhor forma de                          resolver aquele bug que tinha aparecido no software, entretanto foi uma experiência incrível, nunca havia usado o C                      para programar antes e acabei descobrindo várias funcionalidades legais ao desenrolar do projeto, sobretudo a                            experiência na linguaguem. 
 
-### Built With
+### Feito com
 
 * [Codeblocks IDE](http://www.codeblocks.org/)
 * [C](http://linguagemc.com.br/o-que-e-linguagem-c/)
 * [GIT](https://git-scm.com/)
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Começando
 
 Por ser tratar de um projeto simples, você não irá precisar de muita coisa. É recomendável que você use a versão mais recente da sua IDE para rodar o programa sem quaisquer problemas.
 
-### Prerequisites
+### Pré-requisitos
 
 Alguns comandos e bibliotecas infelizmente só funcionam corretamente no windows.  
 
 * Windows
 * IDE para C
 
-### Installation
+### Instalação
 
 1. Clone o repositório
 ```sh
@@ -82,7 +82,7 @@ git clone https://github.com/Duduxs/Projeto-Locadora.git
 3. Cole em sua IDE e execute
 
 <!-- CONTRIBUTING -->
-## Contributing
+## Contribuição
 
 Contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Todas as contribuições que você fizer para esse projeto irei ficar **muito grato**.
 
@@ -93,22 +93,22 @@ Contribuições são o que tornam a comunidade de código aberto um lugar incrí
 5. Abra uma Pull Request
 
 <!-- LICENSE -->
-## License
+## Licença
 
 Distribuído pela MIT License. Consulte o arquivo `LICENSE.txt` para mais informações.
 
 <!-- CONTACT -->
-## Contact
+## Contato
 
 Eduardo José - [duduxss3@gmail.com]
 
 Link do projeto : [https://github.com/Duduxs/Projeto-Locadora](https://github.com/Duduxs/Projeto-Locadora)
 
 <!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+## Reconhecimentos
 * [Imagens Shields](https://shields.io)
 * [Licença](http://escolhaumalicenca.com.br/)
-* [Agradecimento Template](https://github.com/othneildrew)
+* [Agradecimento pela Template](https://github.com/othneildrew)
 * [Logo](https://www.canva.com)
 * [Agradecimento pela proposta do projeto](https://www.linkedin.com/in/brunom4ciel)
 
