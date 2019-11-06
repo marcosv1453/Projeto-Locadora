@@ -389,7 +389,7 @@ void f_cadastrar_estoque(){                             // Função para cadastr
                 break;
             }
 
-            else if(strcmp(filmes[i].titulo,estoques[qtd_estoque].titulo_estoque) != 0 ){
+            else if(strcmp(filmes[i].titulo,estoques[qtd_estoque].titulo_estoque) != 0 && i == qtd_filmes-1){
 
                 // Se o filme não estive cadastrado ainda, então o estoque dos filmes não é realizado.
 
@@ -585,7 +585,7 @@ void f_cadastrar_aluguel(){                           // Função para cadastrar
                 alugar[i].qtd_copias_aluguel[i] += (estoques[i].soma_copias[i] - estoques[i].soma_copias[i]) + 1; // copias do filme
                 --estoques[i].soma_copias[i]; // Remove uma cópia do estoque de um determinado filme
             }
-            else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0 && i == estoque+1 ){
+            else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0 && i == estoque ){
 
                 // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
                 printf("\nEsse filme não está cadastrado em nossa locadora... \n\n");
@@ -783,7 +783,7 @@ void f_listar_aluguel_por_cliente(){            // Função para listar o alugue
 
             break; // Se o nome do cliente estiver correto, irá sair do for
         }
-        else if(strcmp(cliente_consulta,clientes[i].nome) != 0){
+        else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_aluguel-1){
 
             // Se o nome que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
             printf("\nEsse cliente ou filme não está cadastrado em nossa locadora... \n\n");
@@ -866,7 +866,7 @@ void f_consultar_filmes(){                  // Função para consultar os filmes
             printf("O filme existe em nosso catálogo! \n");
             break;
         }
-        else if(consulta != filmes[i].identificador){
+        else if(consulta != filmes[i].identificador & i == qtd_filmes-1){
 
             // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
             printf("O filme não existe em nosso catálogo... \n");
@@ -948,7 +948,7 @@ void f_consultar_clientes(){               // Função para consultar os cliente
             printf("Esse cliente está cadastrado em nossa locadora. \n");
             break;
         }
-        else if(strcmp(cliente_consulta,clientes[j].nome) != 0){      //Só executará a ação quando o laço for terminar
+        else if(strcmp(cliente_consulta,clientes[j].nome) != 0 && j == qtd_clientes-1){      //Só executará a ação quando o laço for terminar
 
 
 
@@ -1114,7 +1114,7 @@ void f_consultar_aluguel_por_cliente(){  // Função para consultar o aluguel po
 
             break; // Se o nome do cliente estiver correto, irá sair do for
         }
-        else if(strcmp(cliente_consulta,clientes[i].nome) != 0){      //Só executará a ação quando o laço for terminar
+        else if(strcmp(cliente_consulta,clientes[i].nome) != 0 && i == qtd_aluguel-1){//Só executará a ação quando o laço for terminar
 
             // Se o nome que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
             printf("\nEsse cliente ou filme não está cadastrado em nossa locadora... \n\n");
@@ -1293,7 +1293,7 @@ void f_visualizar_filme(){           // Função para visualizar o filme
             break;
 
         }
-        else if(consulta != filmes[i].identificador && i == qtd_filmes){    //Só executará a ação quando o laço for terminar
+        else if(consulta != filmes[i].identificador && i == qtd_filmes-1){    //Só executará a ação quando o laço for terminar
 
 
 
@@ -1373,7 +1373,7 @@ void f_visualizar_clientes(){       // Função para visualizar o cliente
             break;
 
         }
-        else if(strcmp(cliente_consulta,clientes[j].nome) != 0){    //Só executará a ação quando o laço for terminar
+        else if(strcmp(cliente_consulta,clientes[j].nome) != 0 & j == qtd_clientes-1){ //Só executará a ação quando o laço for terminar
 
 
 
@@ -1560,7 +1560,7 @@ void f_editar_filme(){          // Função para editar o filme
                 printf("\nFilme atualizado com sucesso! \n");
                 break;
             }
-            else if(consulta != filmes[i].identificador && i == qtd_filmes){    // Só executará a ação quando o laço for terminar
+            else if(consulta != filmes[i].identificador && i == qtd_filmes-1){    // Só executará a ação quando o laço for terminar
 
 
 
@@ -1639,7 +1639,7 @@ void f_editar_filme(){          // Função para editar o filme
                 break;
             }
 
-            else if(consulta != filmes[i].identificador && i == qtd_filmes ){   // Só executa a ação quando o laço for terminar
+            else if(consulta != filmes[i].identificador && i == qtd_filmes-1 ){// Só executa a ação quando o laço for terminar
 
 
 
