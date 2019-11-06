@@ -27,7 +27,7 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [About the Project](#about-the-project)
+* [Sobre o projeto](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
@@ -108,7 +108,7 @@ Link do projeto : [https://github.com/Duduxs/Projeto-Locadora](https://github.co
 ## Acknowledgements
 * [Imagens Shields](https://shields.io)
 * [Licença](http://escolhaumalicenca.com.br/)
-* [Agradecimento Template](https://github.com/othneildrew)
+* [Agradecimento pela Template](https://github.com/othneildrew)
 * [Logo](https://www.canva.com)
 * [Agradecimento pela proposta do projeto](https://www.linkedin.com/in/brunom4ciel)
 
