@@ -90,7 +90,7 @@ struct st_estoque{                                            // Struct para est
 
 
 } estoques[TAMANHO];                   // Inicializando o Struct com um vetor de 100 de tamanho, você só podera estocar 100 filmes
-struct st_aluguel{                                           // Struct para armazenar os alugueis;
+typedef struct {                                             // Struct para armazenar os alugueis;
 
 
 
@@ -125,7 +125,7 @@ struct st_aluguel{                                           // Struct para arma
 
     // ------- Clientes sem cadastros ----------- //
 
-} alugar[TAMANHO];                                     // Criando um vetor com 100 de tamanho, você só poderá alugar 100 filmes
+}aluguel;                                     // Criando o tipo de dado do typedef
 
 // Cadastro dos dados
 void f_cadastrar_filme(){                                 // Função para cadastrar os filmes
@@ -469,6 +469,7 @@ void f_cadastrar_estoque(){                             // Função para cadastr
 }
 void f_cadastar_aluguel_por_cliente(){                 // Função para cadastrar o aluguel por cliente
 
+aluguel alugar[TAMANHO];
 
     printf("\n\t\t\t============================\n");
     printf("\t\t\tCadastro aluguel por cliente");
@@ -505,13 +506,14 @@ void f_cadastar_aluguel_por_cliente(){                 // Função para cadastra
                     alugar[i].qtd_copias_aluguel_cliente[i] += (estoques[i].soma_copias[i] - estoques[i].soma_copias[i]) + 1;// qtd cópias
                     --estoques[i].soma_copias[i]; // Remove uma cópia do estoque de um determinado filme
                 }
-                else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0 && i == estoque+1 ){ // Só executará quando o for terminar
+                else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0){ // Só executará quando o for terminar
 
 
                     // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
                     printf("\nEsse filme não está cadastrado em nossa locadora... \n\n");
                     system("pause");
-                    exit(1);
+                    system("cls");
+                    menu_aluguel();
                 }
 
                 printf("Insira a data de aluguel desse filme (xx/xx/xxxx): ");
@@ -555,7 +557,7 @@ void f_cadastar_aluguel_por_cliente(){                 // Função para cadastra
 }
 void f_cadastrar_aluguel(){                           // Função para cadastrar o aluguel
 
-
+aluguel alugar[TAMANHO];
 
     printf("\n\t\t\t================\n");
     printf("\t\t\tCadastro aluguel");
@@ -566,15 +568,15 @@ void f_cadastrar_aluguel(){                           // Função para cadastrar
 
 
         //Verificando do nome do cliente e atribuindo os dados.
-        for(i = 0 ; i <= estoque ; i++){  // Conta de 0 até a quantidade de filmes cadastrados no estoque.
+        for( i = 0 ; i <= estoque ; i++){  // Conta de 0 até a quantidade de filmes cadastrados no estoque.
 
 
 
-            printf("Diga-me o nome do filme: ");
+            printf("Diga-me o identificador do filme: ");
             setbuf(stdin,keyboard);
-            scanf("%39[^\n]s",&estoque_consulta);
+            scanf("%d",&consulta);
             // Verificação do nome do filme.
-            if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0){
+            if(filmes[i].identificador == consulta){
 
 
                 // Recebendo as informações do usuário.
@@ -585,12 +587,13 @@ void f_cadastrar_aluguel(){                           // Função para cadastrar
                 alugar[i].qtd_copias_aluguel[i] += (estoques[i].soma_copias[i] - estoques[i].soma_copias[i]) + 1; // copias do filme
                 --estoques[i].soma_copias[i]; // Remove uma cópia do estoque de um determinado filme
             }
-            else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0 && i == estoque ){
+            else{
 
                 // Se o identificador que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
                 printf("\nEsse filme não está cadastrado em nossa locadora... \n\n");
                 system("pause");
-                exit(1);
+                system("cls");
+                menu_aluguel();
             }
 
             printf("Insira a data de aluguel desse filme (xx/xx/xxxx): ");
@@ -743,6 +746,7 @@ void f_listar_estoque(){                         // Função para listar o estoq
 }
 void f_listar_aluguel_por_cliente(){            // Função para listar o aluguel por cliente
 
+aluguel alugar[TAMANHO];
 
 
     printf("\n\t\t\t====================================\n");
@@ -805,6 +809,7 @@ void f_listar_aluguel_por_cliente(){            // Função para listar o alugue
 }
 void f_listar_aluguel(){                       // Função para listar o aluguel
 
+aluguel alugar[TAMANHO];
 
     printf("\n\t\t\t==============\n");
     printf("\t\t\tListar aluguel");
@@ -1079,7 +1084,7 @@ void f_consultar_estoque(){               // Função para consultar o estoque
 }
 void f_consultar_aluguel_por_cliente(){  // Função para consultar o aluguel por cliente
 
-
+aluguel alugar[TAMANHO];
     printf("\n\t\t\t======================================\n");
     printf("\t\t\tConsultar aluguel do filme por cliente");
     printf("\n\t\t\t======================================           \n\n");
@@ -1166,20 +1171,20 @@ void f_consultar_aluguel_por_cliente(){  // Função para consultar o aluguel po
 }
 void f_consultar_aluguel(){             // Função para consultar o aluguel
 
-
+aluguel alugar[TAMANHO];
     printf("\n\t\t\t=================\n");
     printf("\t\t\tConsultar aluguel");
     printf("\n\t\t\t=================           \n\n");
 
-    printf("Diga-me o nome do filme: ");
+    printf("Diga-me o identificador do filme: ");
     setbuf(stdin,keyboard);
-    scanf("%39[^\n]s",&estoque_consulta);  // Pegando o input da forma correta, sem o \n
+    scanf("%d",&consulta);  // Pegando o input da forma correta, sem o \n
 
     //Verificando do nome do filme.
     for(i = 0 ; i < qtd_aluguel ; i++){
 
 
-        if(strcmp(estoque_consulta,estoques[i].titulo_estoque) == 0){
+        if(filmes[i].identificador == consulta){
 
 
             if(alugar[i].ano_de_producao_aluguel == 0){
@@ -1201,7 +1206,7 @@ void f_consultar_aluguel(){             // Função para consultar o aluguel
 
             break; // Se o nome do filme estiver correto, irá sair do for
         }
-        else if(strcmp(estoque_consulta,estoques[i].titulo_estoque) != 0){      //Só executará a ação quando o laço for terminar
+        else{      //Só executará a ação quando o laço for terminar
 
             // Se o nome que o usuário digitou não foi igual ao que consta no sistema, então exibe essa mensagem.
             printf("\nEsse filme não está cadastrado em nossa locadora... \n\n");
