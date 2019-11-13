@@ -125,7 +125,7 @@ typedef struct {                                             // Struct para arma
 
     // ------- Clientes sem cadastros ----------- //
 
-}aluguel;                                     // Criando o tipo de dado do typedef
+}aluguel;                                              // Criando o tipo de dado do typedef
 
 // Cadastro dos dados
 void f_cadastrar_filme(){                                 // Função para cadastrar os filmes
@@ -1717,7 +1717,7 @@ void f_editar_filme(){          // Função para editar o filme
     }
 
 }
-void f_editar_clientes(){      //Função para editar os clientes
+void f_editar_clientes(){      // Função para editar os clientes
 
 
 
@@ -2463,9 +2463,21 @@ void menu_aluguel(){    // Função do menu do aluguel
 
 
 }
-
 // Principal
 int main(){          // Função principal
+
+
+int muda_cor(int n){ // Função para mudar cor, recebe escolha como parâmetro
+
+
+if(n == 666 ) // Escolha = 666 == Cor verde
+    system("COLOR A");
+
+else // Escolha != 666 == Cor default
+    system("COLOR 0F");
+
+return n;
+}
 
 
 
@@ -2503,6 +2515,7 @@ int main(){          // Função principal
     case 4:
         system("cls");
         menu_aluguel();
+        break;
     case 5:
         fopen("Banco de dados filmes.txt","w");    // Apagando conteúdo do banco
         fopen("Banco de dados estoque.txt","w");  // Apagando o conteúdo do banco
@@ -2515,6 +2528,11 @@ int main(){          // Função principal
         main();                                // Retorna a main
         break;
     case 6:
+        break;
+    case 666: case 555: // Se o case for 666 ou 555
+        muda_cor(escolha); // Chamo a função passando a escolha
+        system("cls");
+        main();
         break;
     default:
         printf("\nValor não reconhecido... \n\n");
