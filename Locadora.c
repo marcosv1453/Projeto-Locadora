@@ -12,7 +12,7 @@ char keyboard[BUFSIZ];  // Prótotipo de função para limpeza do buffer
 //------ Documentação -------//
 
 /**
-*@author Eduardo José
+*@author Eduardo José / Marcos Menezes
 *@version 1.0.0
 *@since 22/10/19
 *@see Program in STACK (LIFO)
